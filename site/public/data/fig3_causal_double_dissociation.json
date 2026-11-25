@@ -1,0 +1,133 @@
+{
+  "figure": "fig3_causal_double_dissociation",
+  "sources": [
+    "data/v2/exp2_info_flip/exp2_summary.json"
+  ],
+  "panel_a_forest_rows": [
+    {
+      "id": "tone_rewrite_cv",
+      "label": "Tone rewrite: warm vs. blunt (n=61)",
+      "delta_pp": -0.8200000000000001,
+      "ci_lo_pp": -3.64,
+      "ci_hi_pp": 1.69,
+      "p": 1.0,
+      "toward": 0,
+      "away": 0,
+      "n_cases": 61,
+      "color": "#9E9487",
+      "bold": false
+    },
+    {
+      "id": "placebo_cv",
+      "label": "Length-matched public recap, placebo (n=14)",
+      "delta_pp": 3.5700000000000003,
+      "ci_lo_pp": 0.0,
+      "ci_hi_pp": 10.0,
+      "p": 1.0,
+      "toward": 0,
+      "away": 0,
+      "n_cases": 14,
+      "color": "#9E9487",
+      "bold": false
+    },
+    {
+      "id": "state_injection_cv",
+      "label": "Added omitted private rules: overall (n=57)",
+      "delta_pp": 24.560000000000002,
+      "ci_lo_pp": 10.530000000000001,
+      "ci_hi_pp": 38.18,
+      "p": 0.002335,
+      "toward": 11,
+      "away": 1,
+      "n_cases": 57,
+      "color": "#0E3A43",
+      "bold": true
+    },
+    {
+      "id": "state_config_repair_cv",
+      "label": "Config Repair: Round-1 handoff (n=27)",
+      "delta_pp": 38.89,
+      "ci_lo_pp": 13.459999999999999,
+      "ci_hi_pp": 61.53999999999999,
+      "p": 0.018555,
+      "toward": 10,
+      "away": 1,
+      "n_cases": 27,
+      "color": "#3B6B73",
+      "bold": false,
+      "subrow": true
+    },
+    {
+      "id": "state_triage_cv",
+      "label": "Incident Triage: full transcript (n=30)",
+      "delta_pp": 11.67,
+      "ci_lo_pp": 3.3300000000000005,
+      "ci_hi_pp": 21.67,
+      "p": 0.0625,
+      "toward": 1,
+      "away": 0,
+      "n_cases": 30,
+      "color": "#3B6B73",
+      "bold": false,
+      "subrow": true
+    }
+  ],
+  "panel_b_per_evaluator_pooled": [
+    {
+      "evaluator": "neon4",
+      "display": "Gemini 4 Neon",
+      "n_cases": 24,
+      "n_pairs": 24,
+      "mean_delta_info_pp": 50.0,
+      "ci95_pp": [
+        27.08,
+        70.83
+      ],
+      "pair_sign_flip_perm_p": 0.001038,
+      "n_switched_toward_info": 12,
+      "n_switched_away_from_info": 1
+    },
+    {
+      "evaluator": "astra62",
+      "display": "GPT-6.2 Astra",
+      "n_cases": 24,
+      "n_pairs": 24,
+      "mean_delta_info_pp": 16.67,
+      "ci95_pp": [
+        0.0,
+        33.33
+      ],
+      "pair_sign_flip_perm_p": 0.117188,
+      "n_switched_toward_info": 3,
+      "n_switched_away_from_info": 0
+    },
+    {
+      "evaluator": "opus55",
+      "display": "Claude Opus 5.5",
+      "n_cases": 24,
+      "n_pairs": 24,
+      "mean_delta_info_pp": 14.58,
+      "ci95_pp": [
+        0.0,
+        29.17
+      ],
+      "pair_sign_flip_perm_p": 0.091797,
+      "n_switched_toward_info": 1,
+      "n_switched_away_from_info": 0
+    },
+    {
+      "evaluator": "kimi31",
+      "display": "Kimi K3.1 Pro",
+      "n_cases": 24,
+      "n_pairs": 24,
+      "mean_delta_info_pp": 10.42,
+      "ci95_pp": [
+        -2.08,
+        25.0
+      ],
+      "pair_sign_flip_perm_p": 0.234375,
+      "n_switched_toward_info": 1,
+      "n_switched_away_from_info": 0
+    }
+  ]
+}

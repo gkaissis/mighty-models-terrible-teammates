@@ -1,0 +1,37 @@
+# Secrets — NEVER commit
+openrouter_key.txt
+*.key
+.env
+.env.*
+
+# Local Python environment
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Astro site build & dependencies
+site/node_modules/
+site/dist/
+site/.astro/
+
+# OS & editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Raw uncompressed logs exceeding GitHub's 100 MB file limit (lossless zstd Parquet tables live in data/v2/hf_export/)
+data/tmp/
+data/v2/episodes/
+data/v2/ledger.jsonl
+data/v2/choices.jsonl
+data/v2/choices_excluded.jsonl
+data/v2/capstone_tone_flip/*.jsonl
+data/v2/exp1_dropout/*.jsonl
+data/v2/exp2_info_flip/*.jsonl
+data/v2_capstone/ledger.jsonl
+*.sqlite
+*.sqlite3

@@ -1,0 +1,74 @@
+{
+  "figure": "fig6_compute_bloat_tax",
+  "sources": [
+    "data/v2/analysis/meta_v2_1.json"
+  ],
+  "n_episodes_main": 638,
+  "n_episode_side_rows": 893,
+  "n_blocks": 128,
+  "by_partner": [
+    {
+      "partner": "qwen4",
+      "display": "Qwen4 Max",
+      "own_mean_words": 318.5,
+      "prompt_tokens": 32.9,
+      "reasoning_tokens": 12.73,
+      "word_count": 18.96,
+      "cost_usd": 22.09
+    },
+    {
+      "partner": "opus55",
+      "display": "Claude Opus 5.5",
+      "own_mean_words": 244.9,
+      "prompt_tokens": 17.71,
+      "reasoning_tokens": 8.52,
+      "word_count": 11.89,
+      "cost_usd": 8.8
+    },
+    {
+      "partner": "muse",
+      "display": "Meta Muse Wonder",
+      "own_mean_words": 124.6,
+      "prompt_tokens": -1.63,
+      "reasoning_tokens": -0.32,
+      "word_count": -0.61,
+      "cost_usd": -1.07
+    },
+    {
+      "partner": "neon4",
+      "display": "Gemini 4 Neon",
+      "own_mean_words": 131.2,
+      "prompt_tokens": 1.3,
+      "reasoning_tokens": -13.03,
+      "word_count": -1.32,
+      "cost_usd": -2.45
+    },
+    {
+      "partner": "astra60",
+      "display": "GPT-6 Astra",
+      "own_mean_words": 90.6,
+      "prompt_tokens": -12.51,
+      "reasoning_tokens": -3.92,
+      "word_count": 0.04,
+      "cost_usd": -2.99
+    },
+    {
+      "partner": "astra62",
+      "display": "GPT-6.2 Astra",
+      "own_mean_words": 79.7,
+      "prompt_tokens": -16.95,
+      "reasoning_tokens": 1.48,
+      "word_count": -10.21,
+      "cost_usd": -9.01
+    },
+    {
+      "partner": "kimi31",
+      "display": "Kimi K3.1 Pro",
+      "own_mean_words": 60.3,
+      "prompt_tokens": -20.69,
+      "reasoning_tokens": -5.5,
+      "word_count": -18.68,
+      "cost_usd": -15.33
+    }
+  ]
+}

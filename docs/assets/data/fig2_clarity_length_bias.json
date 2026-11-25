@@ -1,0 +1,98 @@
+{
+  "figure": "fig2_clarity_length_bias",
+  "sources": [
+    "data/v2/analysis/meta_v2_1.json"
+  ],
+  "n_turns": 9568,
+  "ols_r_squared": 0.5351,
+  "models": [
+    {
+      "model": "opus55",
+      "display": "Claude Opus 5.5",
+      "mean_word_count": 244.8904,
+      "clarity_raw": 3.0136,
+      "clarity_raw_rank": 1,
+      "clarity_resid": 0.1819,
+      "clarity_length_adjusted": 2.8005,
+      "clarity_length_adjusted_rank": 1
+    },
+    {
+      "model": "qwen4",
+      "display": "Qwen4 Max",
+      "mean_word_count": 318.4969,
+      "clarity_raw": 2.7447,
+      "clarity_raw_rank": 2,
+      "clarity_resid": -0.1753,
+      "clarity_length_adjusted": 2.4434,
+      "clarity_length_adjusted_rank": 7
+    },
+    {
+      "model": "neon4",
+      "display": "Gemini 4 Neon",
+      "mean_word_count": 131.2392,
+      "clarity_raw": 2.6802,
+      "clarity_raw_rank": 3,
+      "clarity_resid": 0.0716,
+      "clarity_length_adjusted": 2.6903,
+      "clarity_length_adjusted_rank": 2
+    },
+    {
+      "model": "muse",
+      "display": "Meta Muse Wonder",
+      "mean_word_count": 124.565,
+      "clarity_raw": 2.6286,
+      "clarity_raw_rank": 4,
+      "clarity_resid": 0.0201,
+      "clarity_length_adjusted": 2.6388,
+      "clarity_length_adjusted_rank": 3
+    },
+    {
+      "model": "astra60",
+      "display": "GPT-6 Astra",
+      "mean_word_count": 90.6177,
+      "clarity_raw": 2.4915,
+      "clarity_raw_rank": 5,
+      "clarity_resid": -0.0427,
+      "clarity_length_adjusted": 2.5759,
+      "clarity_length_adjusted_rank": 5
+    },
+    {
+      "model": "kimi31",
+      "display": "Kimi K3.1 Pro",
+      "mean_word_count": 60.3458,
+      "clarity_raw": 2.3922,
+      "clarity_raw_rank": 6,
+      "clarity_resid": -0.0188,
+      "clarity_length_adjusted": 2.5998,
+      "clarity_length_adjusted_rank": 4
+    },
+    {
+      "model": "astra62",
+      "display": "GPT-6.2 Astra",
+      "mean_word_count": 79.7464,
+      "clarity_raw": 2.3866,
+      "clarity_raw_rank": 7,
+      "clarity_resid": -0.1198,
+      "clarity_length_adjusted": 2.4989,
+      "clarity_length_adjusted_rank": 6
+    }
+  ],
+  "raw_rank_order": [
+    "opus55",
+    "qwen4",
+    "neon4",
+    "muse",
+    "astra60",
+    "kimi31",
+    "astra62"
+  ],
+  "adjusted_rank_order": [
+    "opus55",
+    "neon4",
+    "muse",
+    "kimi31",
+    "astra60",
+    "astra62",
+    "qwen4"
+  ]
+}

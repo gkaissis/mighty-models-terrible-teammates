@@ -1,0 +1,226 @@
+{
+  "schema_version": "exp1_locked_roster_v1",
+  "timestamp_utc": "2026-11-23T11:28:46.839283+00:00",
+  "mock": false,
+  "ceiling_threshold": 0.4,
+  "max_step_ups": 2,
+  "n_gate_cases": 16,
+  "receivers": {
+    "astra62": {
+      "key": "astra62",
+      "slug": "openai/gpt-6.2-astra",
+      "family": "openai",
+      "display_name": "GPT-6.2 Astra",
+      "tier": "frontier",
+      "provider_only": [
+        "OpenAI"
+      ],
+      "concurrency": 16,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 8.0,
+      "output_per_m": 40.0,
+      "max_tokens": 16384,
+      "initial_effort": "medium",
+      "locked_effort": "medium",
+      "locked_reasoning_payload": {
+        "effort": "medium"
+      },
+      "locked_aa_index_v5": 62.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.3125,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "neon4": {
+      "key": "neon4",
+      "slug": "google/gemini-4-neon",
+      "family": "google",
+      "display_name": "Gemini 4 Neon",
+      "tier": "frontier",
+      "provider_only": [
+        "Google AI Studio"
+      ],
+      "concurrency": 16,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 3.0,
+      "output_per_m": 15.0,
+      "max_tokens": 16384,
+      "initial_effort": "medium",
+      "locked_effort": "medium",
+      "locked_reasoning_payload": {
+        "effort": "medium"
+      },
+      "locked_aa_index_v5": 61.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.4375,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "opus55": {
+      "key": "opus55",
+      "slug": "anthropic/claude-opus-5.5",
+      "family": "anthropic",
+      "display_name": "Claude Opus 5.5",
+      "tier": "frontier",
+      "provider_only": [
+        "Anthropic"
+      ],
+      "concurrency": 16,
+      "supports_anthropic_cache_control": true,
+      "input_per_m": 4.0,
+      "output_per_m": 20.0,
+      "max_tokens": 16384,
+      "initial_effort": "medium",
+      "locked_effort": "medium",
+      "locked_reasoning_payload": {
+        "effort": "medium"
+      },
+      "locked_aa_index_v5": 59.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.25,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "astra60": {
+      "key": "astra60",
+      "slug": "openai/gpt-6-astra",
+      "family": "openai",
+      "display_name": "GPT-6 Astra",
+      "tier": "frontier",
+      "provider_only": [
+        "OpenAI"
+      ],
+      "concurrency": 16,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 10.0,
+      "output_per_m": 50.0,
+      "max_tokens": 16384,
+      "initial_effort": "medium",
+      "locked_effort": "medium",
+      "locked_reasoning_payload": {
+        "effort": "medium"
+      },
+      "locked_aa_index_v5": 57.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.3125,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "hydrogen": {
+      "key": "hydrogen",
+      "slug": "google/gemini-4-hydrogen",
+      "family": "google",
+      "display_name": "Gemini 4 Hydrogen",
+      "tier": "worker",
+      "provider_only": [
+        "Google AI Studio"
+      ],
+      "concurrency": 24,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 1.5,
+      "output_per_m": 7.5,
+      "max_tokens": 16384,
+      "initial_effort": "low",
+      "locked_effort": "low",
+      "locked_reasoning_payload": {
+        "effort": "low"
+      },
+      "locked_aa_index_v5": 27.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.3125,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "haiku55": {
+      "key": "haiku55",
+      "slug": "anthropic/claude-haiku-5.5",
+      "family": "anthropic",
+      "display_name": "Claude Haiku 5.5",
+      "tier": "worker",
+      "provider_only": [
+        "Anthropic"
+      ],
+      "concurrency": 24,
+      "supports_anthropic_cache_control": true,
+      "input_per_m": 0.1,
+      "output_per_m": 0.5,
+      "max_tokens": 16384,
+      "initial_effort": "low",
+      "locked_effort": "low",
+      "locked_reasoning_payload": {
+        "effort": "low"
+      },
+      "locked_aa_index_v5": 19.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.0625,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "deepseek_flash": {
+      "key": "deepseek_flash",
+      "slug": "deepseek/deepseek-v4.1-flash",
+      "family": "deepseek",
+      "display_name": "DeepSeek V4.1 Flash",
+      "tier": "worker",
+      "provider_only": [
+        "BaseTen"
+      ],
+      "concurrency": 32,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 0.3,
+      "output_per_m": 1.2,
+      "max_tokens": 16384,
+      "initial_effort": "disabled",
+      "locked_effort": "disabled",
+      "locked_reasoning_payload": {
+        "enabled": false
+      },
+      "locked_aa_index_v5": 19.0,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.3125,
+      "gate_ceiling_strict_pass_rate": 1.0,
+      "gate_ceiling_own_plus_r3_pass_rate": 1.0,
+      "gate_ceiling_partner_pass_rate": 1.0
+    },
+    "gpt6_luna": {
+      "key": "gpt6_luna",
+      "slug": "openai/gpt-6-luna",
+      "family": "openai",
+      "display_name": "GPT-6 Luna",
+      "tier": "worker",
+      "provider_only": [
+        "OpenAI"
+      ],
+      "concurrency": 24,
+      "supports_anthropic_cache_control": false,
+      "input_per_m": 0.1,
+      "output_per_m": 0.5,
+      "max_tokens": 16384,
+      "initial_effort": "low",
+      "locked_effort": "low",
+      "locked_reasoning_payload": {
+        "effort": "low"
+      },
+      "locked_aa_index_v5": null,
+      "step_ups_performed": 0,
+      "gate_passed": true,
+      "gate_floor_strict_pass_rate": 0.1875,
+      "gate_ceiling_strict_pass_rate": 0.9375,
+      "gate_ceiling_own_plus_r3_pass_rate": 0.9375,
+      "gate_ceiling_partner_pass_rate": 0.9375
+    }
+  }
+}

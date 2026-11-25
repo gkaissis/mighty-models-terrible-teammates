@@ -1,0 +1,43 @@
+[project]
+name = "common-ground"
+version = "0.1.0"
+description = "Mighty Models, Terrible Teammates — multi-agent collaboration harness, deterministic verifiers, causal crossover controls, and reproducibility suite."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.0",
+    "pydantic>=2.10.0",
+    "numpy>=2.1.0",
+    "scipy>=1.14.0",
+    "statsmodels>=0.14.4",
+    "pandas>=2.2.0",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.2",
+    "pyarrow>=18.0.0",
+    "rapidfuzz>=3.10.0",
+    "rich>=13.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/common_ground"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

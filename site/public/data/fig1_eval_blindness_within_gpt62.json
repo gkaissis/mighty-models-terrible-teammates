@@ -1,0 +1,108 @@
+{
+  "figure": "fig1_eval_blindness_within_gpt62",
+  "sources": [
+    "data/v2/analysis/meta_v2_1.json"
+  ],
+  "panel_a_within_gpt62_score_eq_1": {
+    "shared_n_episodes": 21,
+    "withheld_n_episodes": 28,
+    "shared_mean_episode_words": 49.29,
+    "withheld_mean_episode_words": 45.05,
+    "metrics": [
+      {
+        "metric": "task_score",
+        "shared_pct": 100.0,
+        "withheld_pct": 100.0,
+        "delta_note": null
+      },
+      {
+        "metric": "partner_rating",
+        "shared_pct": 95.24,
+        "withheld_pct": 92.06,
+        "delta_note": null
+      },
+      {
+        "metric": "keep_rate",
+        "shared_pct": 100.0,
+        "withheld_pct": 100.0,
+        "delta_note": null
+      },
+      {
+        "metric": "cross_vendor_choice",
+        "shared_pct": 48.15,
+        "withheld_pct": 16.67,
+        "delta_note": "-31.5 pp"
+      },
+      {
+        "metric": "exact_tie_choice",
+        "shared_pct": 39.13,
+        "withheld_pct": 2.27,
+        "delta_note": "-36.9 pp"
+      }
+    ],
+    "contrasts": {
+      "score_diff": 0.0,
+      "r1_word_count_diff": 58.8,
+      "episode_word_count_diff": 4.24,
+      "f1_again_diff": 0.2223,
+      "choice_overall": {
+        "win_rate_diff": 0.3148,
+        "fisher_exact_p": 0.000864,
+        "fisher_exact_p_fmt": "< 0.001",
+        "episode_perm_p": 0.037792,
+        "episode_perm_p_fmt": "0.0378"
+      },
+      "choice_exact_ties": {
+        "win_rate_diff": 0.3686,
+        "fisher_exact_p": 1.2e-05,
+        "fisher_exact_p_fmt": "< 0.001",
+        "episode_perm_p": 0.0002,
+        "episode_perm_p_fmt": "< 0.001"
+      }
+    }
+  },
+  "panel_b_asymmetry": {
+    "models": [
+      {
+        "model": "neon4",
+        "display": "Gemini 4 Neon",
+        "speaking_first_r1_ge5_pct": 100.0,
+        "exact_tie_prefers_discloser_pct": 100.0,
+        "wins": 34,
+        "n_discordant_ties": 34,
+        "gap_pp": 0.0,
+        "case_perm_p": 0.0005
+      },
+      {
+        "model": "opus55",
+        "display": "Claude Opus 5.5",
+        "speaking_first_r1_ge5_pct": 75.0,
+        "exact_tie_prefers_discloser_pct": 88.24,
+        "wins": 60,
+        "n_discordant_ties": 68,
+        "gap_pp": 13.24,
+        "case_perm_p": 0.0005
+      },
+      {
+        "model": "astra62",
+        "display": "GPT-6.2 Astra",
+        "speaking_first_r1_ge5_pct": 25.0,
+        "exact_tie_prefers_discloser_pct": 81.25,
+        "wins": 52,
+        "n_discordant_ties": 64,
+        "gap_pp": 56.25,
+        "case_perm_p": 0.001499
+      },
+      {
+        "model": "kimi31",
+        "display": "Kimi K3.1 Pro",
+        "speaking_first_r1_ge5_pct": 0.0,
+        "exact_tie_prefers_discloser_pct": 75.0,
+        "wins": 21,
+        "n_discordant_ties": 28,
+        "gap_pp": 75.0,
+        "case_perm_p": 0.036482
+      }
+    ]
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "figure": "fig4_dropout_sender_and_ladder",
+  "sources": [
+    "data/v2/exp1_dropout/exp1_summary.json",
+    "data/v2/exp1_dropout/gate_report.json",
+    "data/v2/hf_export/exp1_dropout.parquet"
+  ],
+  "panel_a_sender_primary_first_speaker_other_provider": [
+    {
+      "sender": "astra60",
+      "display": "GPT-6 Astra",
+      "overall_pass_pct": 98.75,
+      "overall_pass_ci95_pct": [
+        96.25,
+        100.0
+      ],
+      "completed_only_pass_pct": 98.75,
+      "own_plus_r3_ok_pct": 100.0,
+      "mean_r1_r2_rules": 7.0,
+      "n_cases": 80,
+      "n_truncations": 0
+    },
+    {
+      "sender": "muse",
+      "display": "Meta Muse Wonder",
+      "overall_pass_pct": 98.44,
+      "overall_pass_ci95_pct": [
+        96.09,
+        100.0
+      ],
+      "completed_only_pass_pct": 98.44,
+      "own_plus_r3_ok_pct": 98.44,
+      "mean_r1_r2_rules": 7.0,
+      "n_cases": 128,
+      "n_truncations": 0
+    },
+    {
+      "sender": "neon4",
+      "display": "Gemini 4 Neon",
+      "overall_pass_pct": 97.62,
+      "overall_pass_ci95_pct": [
+        95.24,
+        99.4
+      ],
+      "completed_only_pass_pct": 97.62,
+      "own_plus_r3_ok_pct": 97.62,
+      "mean_r1_r2_rules": 7.0,
+      "n_cases": 168,
+      "n_truncations": 0
+    },
+    {
+      "sender": "opus55",
+      "display": "Claude Opus 5.5",
+      "overall_pass_pct": 97.62,
+      "overall_pass_ci95_pct": [
+        95.24,
+        99.4
+      ],
+      "completed_only_pass_pct": 97.62,
+      "own_plus_r3_ok_pct": 99.4,
+      "mean_r1_r2_rules": 6.21,
+      "n_cases": 168,
+      "n_truncations": 0
+    },
+    {
+      "sender": "qwen4",
+      "display": "Qwen4 Max",
+      "overall_pass_pct": 93.75,
+      "overall_pass_ci95_pct": [
+        87.5,
+        99.22
+      ],
+      "completed_only_pass_pct": 93.75,
+      "own_plus_r3_ok_pct": 99.22,
+      "mean_r1_r2_rules": 5.56,
+      "n_cases": 128,
+      "n_truncations": 0
+    },
+    {
+      "sender": "astra62",
+      "display": "GPT-6.2 Astra",
+      "overall_pass_pct": 65.0,
+      "overall_pass_ci95_pct": [
+        49.29,
+        79.3
+      ],
+      "completed_only_pass_pct": 67.41,
+      "own_plus_r3_ok_pct": 100.0,
+      "mean_r1_r2_rules": 2.64,
+      "n_cases": 140,
+      "n_truncations": 5
+    },
+    {
+      "sender": "kimi31",
+      "display": "Kimi K3.1 Pro",
+      "overall_pass_pct": 61.16,
+      "overall_pass_ci95_pct": [
+        47.32,
+        74.55
+      ],
+      "completed_only_pass_pct": 63.13,
+      "own_plus_r3_ok_pct": 99.54,
+      "mean_r1_r2_rules": 2.5,
+      "n_cases": 224,
+      "n_truncations": 7
+    }
+  ],
+  "within_gpt62_first_speaker_split_r1": {
+    "shared_strict_pct": 100.0,
+    "shared_pass": 35,
+    "shared_n": 35,
+    "shared_episodes": 7,
+    "withheld_strict_pct": 53.33,
+    "withheld_pass": 56,
+    "withheld_n": 105,
+    "withheld_episodes": 21,
+    "delta_strict_pp": 46.67,
+    "delta_strict_ci95_pp": [
+      29.5,
+      63.81
+    ],
+    "exact_episode_perm_p": 0.00694571
+  },
+  "within_gpt62_first_speaker_split_r1_r2": {
+    "shared_strict_pct": 100.0,
+    "shared_pass": 50,
+    "shared_n": 50,
+    "shared_episodes": 10,
+    "withheld_strict_pct": 45.56,
+    "withheld_pass": 41,
+    "withheld_n": 90,
+    "withheld_episodes": 18,
+    "delta_strict_pp": 54.44,
+    "delta_strict_ci95_pp": [
+      35.56,
+      71.11
+    ],
+    "exact_episode_perm_p": 0.00054286
+  },
+  "panel_b_receiver_capability_ladder_actual_disclosure": [
+    {
+      "receiver": "astra62",
+      "display": "GPT-6.2 Astra",
+      "label": "GPT-6.2 Astra (62)",
+      "tier": "frontier",
+      "aa_index_v5": 62.0,
+      "floor_pct": 31.25,
+      "withheld_pct": 68.18181818181819,
+      "withheld_ok_pct": 68.18181818181819,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 100.0,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "neon4",
+      "display": "Gemini 4 Neon",
+      "label": "Gemini 4 Neon (61)",
+      "tier": "frontier",
+      "aa_index_v5": 61.0,
+      "floor_pct": 43.75,
+      "withheld_pct": 63.63636363636363,
+      "withheld_ok_pct": 87.5,
+      "withheld_truncations": 12,
+      "withheld_n": 44,
+      "shared_pct": 100.0,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "opus55",
+      "display": "Claude Opus 5.5",
+      "label": "Claude Opus 5.5 (59)",
+      "tier": "frontier",
+      "aa_index_v5": 59.0,
+      "floor_pct": 25.0,
+      "withheld_pct": 63.63636363636363,
+      "withheld_ok_pct": 63.63636363636363,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 99.13793103448276,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "astra60",
+      "display": "GPT-6 Astra",
+      "label": "GPT-6 Astra (57)",
+      "tier": "frontier",
+      "aa_index_v5": 57.0,
+      "floor_pct": 31.25,
+      "withheld_pct": 59.09090909090909,
+      "withheld_ok_pct": 59.09090909090909,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 100.0,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "hydrogen",
+      "display": "Gemini 4 Hydrogen",
+      "label": "Gemini 4 Hydrogen (low, 27)",
+      "tier": "worker",
+      "aa_index_v5": 27.0,
+      "floor_pct": 31.25,
+      "withheld_pct": 56.81818181818182,
+      "withheld_ok_pct": 56.81818181818182,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 100.0,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "deepseek_flash",
+      "display": "DeepSeek V4.1 Flash",
+      "label": "DeepSeek V4.1 Flash (off, 19)",
+      "tier": "worker",
+      "aa_index_v5": 19.0,
+      "floor_pct": 31.25,
+      "withheld_pct": 40.90909090909091,
+      "withheld_ok_pct": 40.90909090909091,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 98.27586206896552,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "haiku55",
+      "display": "Claude Haiku 5.5",
+      "label": "Claude Haiku 5.5 (low, 19)",
+      "tier": "worker",
+      "aa_index_v5": 19.0,
+      "floor_pct": 6.25,
+      "withheld_pct": 29.545454545454547,
+      "withheld_ok_pct": 29.545454545454547,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 99.13793103448276,
+      "shared_n": 116,
+      "ceiling_pct": 100.0
+    },
+    {
+      "receiver": "gpt6_luna",
+      "display": "GPT-6 Luna",
+      "label": "GPT-6 Luna (low, unscored)",
+      "tier": "worker",
+      "aa_index_v5": null,
+      "floor_pct": 18.75,
+      "withheld_pct": 27.272727272727273,
+      "withheld_ok_pct": 27.272727272727273,
+      "withheld_truncations": 0,
+      "withheld_n": 44,
+      "shared_pct": 88.79310344827586,
+      "shared_n": 116,
+      "ceiling_pct": 93.75
+    }
+  ]
+}

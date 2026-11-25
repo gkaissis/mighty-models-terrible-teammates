@@ -1,0 +1,124 @@
+---
+// The article page: header, contents column, text with a margin column, footer.
+// A post selects it with `layout: ../layouts/Article.astro` in its front matter.
+import 'katex/dist/katex.min.css';
+import '../styles/fonts.css';
+import '../styles/core.css';
+import spectral300 from '../assets/fonts/spectral-latin-300-normal.woff2?url';
+import spectral400 from '../assets/fonts/spectral-latin-400-normal.woff2?url';
+import { bibtex, isoDate, license, longDate, people, readingTime } from '../lib/meta.mjs';
+
+interface Heading { depth: number; slug: string; text: string }
+interface Author { name: string; href: string | null; marks: number[]; equal?: boolean; corresponding?: boolean }
+interface Affiliation { n: number; name: string; url?: string }
+interface Props { frontmatter: Record<string, any>; headings?: Heading[] }
+
+const { frontmatter, headings = [] } = Astro.props;
+if (!frontmatter?.title) throw new Error('The post needs a `title` in its front matter.');
+
+const { authors, affiliations, numbered, anyEqual, anyCorresponding } = people(frontmatter) as {
+  authors: Author[]; affiliations: Affiliation[]; numbered: boolean; anyEqual: boolean; anyCorresponding: boolean;
+};
+const sections = headings.filter((h) => h.depth === 2);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : null;
+const description = frontmatter.abstract ?? frontmatter.subtitle ?? '';
+const lic = license(frontmatter.license);
+const cite = bibtex(frontmatter, authors, canonical);
+const published = longDate(frontmatter.date);
+const updated = longDate(frontmatter.updated);
+const read = readingTime(frontmatter.minutes);
+const dateline = [published, read].filter(Boolean).join(', ');
+const home = frontmatter.site;
+const marks = (a: Author) => [...(numbered ? a.marks : []), ...(a.equal ? ['*'] : []), ...(a.corresponding ? ['†'] : [])].join(',');
+const joiner = (i: number, n: number) => (i === n - 1 ? '' : i === n - 2 ? (n > 2 ? ', and ' : ' and ') : ', ');
+---
+<!doctype html>
+<html lang={frontmatter.lang ?? 'en'}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{frontmatter.title}</title>
+{description && <meta name="description" content={description}>}
+{canonical && <link rel="canonical" href={canonical}>}
+<link rel="icon" href={base + 'favicon.svg'} type="image/svg+xml">
+<link rel="preload" as="font" type="font/woff2" href={spectral300} crossorigin>
+<link rel="preload" as="font" type="font/woff2" href={spectral400} crossorigin>
+<meta property="og:type" content="article">
+<meta property="og:title" content={frontmatter.title}>
+{description && <meta property="og:description" content={description}>}
+{canonical && <meta property="og:url" content={canonical}>}
+<meta name="citation_title" content={frontmatter.title}>
+{authors.map((a) => <meta name="citation_author" content={a.name}>)}
+{frontmatter.date && <meta name="citation_publication_date" content={isoDate(frontmatter.date).replaceAll('-', '/')}>}
+{frontmatter.doi && <meta name="citation_doi" content={frontmatter.doi}>}
+<script is:inline>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="pg">
+
+{home?.name && (
+<div class="top">
+<a class="nav home" href={home.url ?? base}>{home.name}</a>
+</div>
+)}
+
+<main class:list={['frame', { 'has-top': home?.name }]}>
+
+<header class="head">
+{dateline && <p class="dateline">{frontmatter.date ? <time datetime={isoDate(frontmatter.date)}>{published}</time> : null}{read && <span class="on-screen">{(published ? ', ' : '') + read}</span>}.{updated && <> Updated <time datetime={isoDate(frontmatter.updated)}>{updated}</time>.</>}</p>}
+<h1>{frontmatter.title}</h1>
+{frontmatter.subtitle && <p class="standfirst">{frontmatter.subtitle}</p>}
+{authors.length > 0 && (
+<div class="byline">
+<p class="authors">{authors.map((a, i) => (
+<>{a.href ? <a href={a.href}>{a.name}</a> : a.name}{marks(a) && <sup>{marks(a)}</sup>}{joiner(i, authors.length)}</>
+))}</p>
+{affiliations.length > 0 && (
+<p class="affils">{affiliations.map((f, i) => (
+<>{numbered && <sup>{f.n}</sup>}{f.url ? <a href={f.url}>{f.name}</a> : f.name}{i < affiliations.length - 1 ? '; ' : ''}</>
+))}</p>
+)}
+{(anyEqual || anyCorresponding) && (
+<p class="affils">{[anyEqual && '* Equal contribution.', anyCorresponding && '† Corresponding author.'].filter(Boolean).join(' ')}</p>
+)}
+</div>
+)}
+<div class="actions">
+<button class="act" type="button" data-cite aria-expanded="false" aria-controls="citebox">Cite this post</button>
+<button class="act" type="button" data-copy={canonical ?? ''}>Copy link</button>
+{frontmatter.doi && <a class="act" href={'https://doi.org/' + frontmatter.doi}>DOI</a>}
+{frontmatter.repository && <a class="act" href={frontmatter.repository}>Code</a>}
+</div>
+<pre class="citebox" id="citebox" hidden>{cite}</pre>
+</header>
+
+{sections.length > 1 && (
+<nav class="toc" aria-label="Contents">
+<div class="toc-title">Contents</div>
+{sections.map((s) => <a href={'#' + s.slug}>{s.text}</a>)}
+</nav>
+)}
+
+<article class="body">
+<slot />
+</article>
+
+</main>
+
+<footer class="foot">
+<p class="foot-screen">
+{lic && <>Text licensed under {lic.url ? <a href={lic.url} rel="license">{lic.name}</a> : lic.name}. </>}
+{frontmatter.repository && <><a href={frontmatter.repository}>Source repository</a>. </>}
+Set in Spectral and JetBrains Mono.
+{frontmatter.legal && <> <a href={frontmatter.legal}>Legal notice and privacy</a>.</>}
+</p>
+{canonical && <p class="foot-print">{canonical.replace(/^https?:\/\//, '').replace(/\/$/, '')}</p>}
+</footer>
+
+</div>
+<script>
+import '../scripts/article.ts';
+</script>
+</body>
+</html>

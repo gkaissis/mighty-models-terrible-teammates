@@ -1,0 +1,579 @@
+{
+  "figure": "fig7_triage_paralysis",
+  "sources": [
+    "data/v2/analysis/meta_v2_1.json",
+    "data/v2/hf_export/episodes.parquet"
+  ],
+  "models_order": [
+    "astra62",
+    "opus55",
+    "neon4",
+    "kimi31",
+    "astra60",
+    "muse",
+    "qwen4"
+  ],
+  "astra60_astra62_zero_score_deadlocks": 3,
+  "cells": [
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.9
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.35
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "astra60",
+      "operator_display": "GPT-6 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 0.0,
+        "304": 0.35
+      },
+      "mean_score": 0.5875,
+      "min_score": 0.0
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "muse",
+      "operator_display": "Meta Muse Wonder",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "astra62",
+      "investigator_display": "GPT-6.2 Astra",
+      "operator_role_b": "qwen4",
+      "operator_display": "Qwen4 Max",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 0.35,
+        "304": 1.0
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 0.9,
+        "304": 0.35
+      },
+      "mean_score": 0.8125,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "astra60",
+      "operator_display": "GPT-6 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.35
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "muse",
+      "operator_display": "Meta Muse Wonder",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.9
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "opus55",
+      "investigator_display": "Claude Opus 5.5",
+      "operator_role_b": "qwen4",
+      "operator_display": "Qwen4 Max",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.9
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "astra60",
+      "operator_display": "GPT-6 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.9
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "muse",
+      "operator_display": "Meta Muse Wonder",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "neon4",
+      "investigator_display": "Gemini 4 Neon",
+      "operator_role_b": "qwen4",
+      "operator_display": "Qwen4 Max",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.9
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.35
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "astra60",
+      "operator_display": "GPT-6 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 0.9,
+        "303": 0.35,
+        "304": 0.35
+      },
+      "mean_score": 0.65,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "muse",
+      "operator_display": "Meta Muse Wonder",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "kimi31",
+      "investigator_display": "Kimi K3.1 Pro",
+      "operator_role_b": "qwen4",
+      "operator_display": "Qwen4 Max",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.35
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "astra60",
+      "investigator_display": "GPT-6 Astra",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 0.0,
+        "304": 0.0
+      },
+      "mean_score": 0.5,
+      "min_score": 0.0
+    },
+    {
+      "investigator_role_a": "astra60",
+      "investigator_display": "GPT-6 Astra",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 0.35
+      },
+      "mean_score": 0.8375,
+      "min_score": 0.35
+    },
+    {
+      "investigator_role_a": "astra60",
+      "investigator_display": "GPT-6 Astra",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "astra60",
+      "investigator_display": "GPT-6 Astra",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 0.9,
+        "304": 1.0
+      },
+      "mean_score": 0.975,
+      "min_score": 0.9
+    },
+    {
+      "investigator_role_a": "muse",
+      "investigator_display": "Meta Muse Wonder",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "muse",
+      "investigator_display": "Meta Muse Wonder",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "muse",
+      "investigator_display": "Meta Muse Wonder",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "muse",
+      "investigator_display": "Meta Muse Wonder",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "qwen4",
+      "investigator_display": "Qwen4 Max",
+      "operator_role_b": "astra62",
+      "operator_display": "GPT-6.2 Astra",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "qwen4",
+      "investigator_display": "Qwen4 Max",
+      "operator_role_b": "opus55",
+      "operator_display": "Claude Opus 5.5",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    },
+    {
+      "investigator_role_a": "qwen4",
+      "investigator_display": "Qwen4 Max",
+      "operator_role_b": "neon4",
+      "operator_display": "Gemini 4 Neon",
+      "seed_scores": {
+        "301": 0.95,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 0.9875,
+      "min_score": 0.95
+    },
+    {
+      "investigator_role_a": "qwen4",
+      "investigator_display": "Qwen4 Max",
+      "operator_role_b": "kimi31",
+      "operator_display": "Kimi K3.1 Pro",
+      "seed_scores": {
+        "301": 1.0,
+        "302": 1.0,
+        "303": 1.0,
+        "304": 1.0
+      },
+      "mean_score": 1.0,
+      "min_score": 1.0
+    }
+  ]
+}

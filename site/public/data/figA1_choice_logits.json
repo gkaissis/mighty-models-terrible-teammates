@@ -1,0 +1,181 @@
+{
+  "figure": "figA1_choice_logits",
+  "sources": [
+    "data/v2/analysis/meta_v2_1.json"
+  ],
+  "n_choices_all_live": 2926,
+  "n_choices_exact_ties": 1522,
+  "n_clusters_all_live": 32,
+  "n_clusters_exact_ties": 31,
+  "omitted_d_score_all_live": {
+    "coef": 1.6838,
+    "se": 0.438,
+    "z": 3.845,
+    "p": 0.000121,
+    "p_fmt": "< 0.001"
+  },
+  "predictors": [
+    {
+      "predictor": "d_answers_directly",
+      "label": "Answers directly",
+      "all_live_choices_with_fe": {
+        "coef": 0.6034,
+        "se": 0.1784,
+        "z": 3.383,
+        "p": 0.000717,
+        "p_fmt": "< 0.001"
+      },
+      "exact_ties_with_fe": {
+        "coef": 0.6472,
+        "se": 0.1736,
+        "z": 3.728,
+        "p": 0.000193,
+        "p_fmt": "< 0.001"
+      }
+    },
+    {
+      "predictor": "d_wooden_legalistic",
+      "label": "Formal / legalistic style",
+      "all_live_choices_with_fe": {
+        "coef": 0.449,
+        "se": 0.1817,
+        "z": 2.471,
+        "p": 0.01347,
+        "p_fmt": "0.0135"
+      },
+      "exact_ties_with_fe": {
+        "coef": 0.2534,
+        "se": 0.1865,
+        "z": 1.358,
+        "p": 0.174367,
+        "p_fmt": "0.1744"
+      }
+    },
+    {
+      "predictor": "d_ids_per_100",
+      "label": "Identifiers per 100 words",
+      "all_live_choices_with_fe": {
+        "coef": 0.1589,
+        "se": 0.104,
+        "z": 1.529,
+        "p": 0.126358,
+        "p_fmt": "0.1264"
+      },
+      "exact_ties_with_fe": {
+        "coef": 0.241,
+        "se": 0.1178,
+        "z": 2.046,
+        "p": 0.040777,
+        "p_fmt": "0.0408"
+      }
+    },
+    {
+      "predictor": "d_log_wc",
+      "label": "Log word count",
+      "all_live_choices_with_fe": {
+        "coef": 0.1703,
+        "se": 0.3077,
+        "z": 0.553,
+        "p": 0.580008,
+        "p_fmt": "0.5800"
+      },
+      "exact_ties_with_fe": {
+        "coef": -0.0499,
+        "se": 0.3884,
+        "z": -0.128,
+        "p": 0.897845,
+        "p_fmt": "0.8978"
+      }
+    },
+    {
+      "predictor": "d_warmth",
+      "label": "Warmth",
+      "all_live_choices_with_fe": {
+        "coef": -0.0617,
+        "se": 0.2282,
+        "z": -0.27,
+        "p": 0.787008,
+        "p_fmt": "0.7870"
+      },
+      "exact_ties_with_fe": {
+        "coef": -0.0789,
+        "se": 0.2591,
+        "z": -0.305,
+        "p": 0.760639,
+        "p_fmt": "0.7606"
+      }
+    },
+    {
+      "predictor": "d_skips_why",
+      "label": "Skips explaining why",
+      "all_live_choices_with_fe": {
+        "coef": -0.0785,
+        "se": 0.2732,
+        "z": -0.287,
+        "p": 0.773773,
+        "p_fmt": "0.7738"
+      },
+      "exact_ties_with_fe": {
+        "coef": -0.0353,
+        "se": 0.2884,
+        "z": -0.122,
+        "p": 0.902727,
+        "p_fmt": "0.9027"
+      }
+    },
+    {
+      "predictor": "d_condescending_pedantic",
+      "label": "Condescending / pedantic",
+      "all_live_choices_with_fe": {
+        "coef": -0.196,
+        "se": 0.2283,
+        "z": -0.858,
+        "p": 0.390681,
+        "p_fmt": "0.3907"
+      },
+      "exact_ties_with_fe": {
+        "coef": 0.0332,
+        "se": 0.2419,
+        "z": 0.137,
+        "p": 0.890913,
+        "p_fmt": "0.8909"
+      }
+    },
+    {
+      "predictor": "d_clarity_resid",
+      "label": "Clarity (length-adjusted)",
+      "all_live_choices_with_fe": {
+        "coef": -0.2229,
+        "se": 0.145,
+        "z": -1.537,
+        "p": 0.124334,
+        "p_fmt": "0.1243"
+      },
+      "exact_ties_with_fe": {
+        "coef": -0.1289,
+        "se": 0.1649,
+        "z": -0.782,
+        "p": 0.434289,
+        "p_fmt": "0.4343"
+      }
+    },
+    {
+      "predictor": "d_s_conf",
+      "label": "Self-confusion",
+      "all_live_choices_with_fe": {
+        "coef": -0.2912,
+        "se": 0.1187,
+        "z": -2.453,
+        "p": 0.014185,
+        "p_fmt": "0.0142"
+      },
+      "exact_ties_with_fe": {
+        "coef": -0.2028,
+        "se": 0.1114,
+        "z": -1.82,
+        "p": 0.068708,
+        "p_fmt": "0.0687"
+      }
+    }
+  ]
+}

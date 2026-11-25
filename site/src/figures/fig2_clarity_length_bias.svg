@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="705.6pt" height="338.4pt" viewBox="0 0 705.6 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 338.4 
+L 705.6 338.4 
+L 705.6 0 
+L 0 0 
+z
+" style="fill: #f1eadc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 28.224 318.096 
+L 677.376 318.096 
+L 677.376 60.912 
+L 28.224 60.912 
+z
+" style="fill: #f1eadc"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 282.793412 99.977924 
+L 282.793412 305.074025 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #e0d6c3; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 422.806588 99.977924 
+L 422.806588 305.074025 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #e0d6c3; stroke-width: 1.1; stroke-linecap: square"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4b433b" transform="translate(200.943934 73.329272)">Raw clarity rank</text>
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4b433b" transform="translate(133.249403 82.423442)">(mean 0 to 4 score, words/turn)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4b433b" transform="translate(432.352941 73.32811)">Length-adjusted rank</text>
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4b433b" transform="translate(432.352941 82.422778)">(residual after length, task &amp; role)</text>
+   </g>
+   <g id="line2d_3">
+    <path d="M 282.793412 104.861165 
+L 422.806588 104.861165 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="107.153923" transform="rotate(-0 270.064941 107.153923)">#1  Claude Opus 5.5  (3.014, 245 words)</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="107.153923" transform="rotate(-0 435.535059 107.153923)">#1  Claude Opus 5.5  (+0.182)</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4a0908" x="270.064941" y="139.709192" transform="rotate(-0 270.064941 139.709192)">#2  Qwen4 Max  (2.745, 318 words)</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="435.535059" y="302.483876" transform="rotate(-0 435.535059 302.483876)">#7  Qwen4 Max  (-0.175)</text>
+   </g>
+   <g id="line2d_4">
+    <path d="M 282.793412 169.971038 
+L 422.806588 137.416101 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="172.264129" transform="rotate(-0 270.064941 172.264129)">#3  Gemini 4 Neon  (2.680, 131 words)</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="139.709192" transform="rotate(-0 435.535059 139.709192)">#2  Gemini 4 Neon  (+0.072)</text>
+   </g>
+   <g id="line2d_5">
+    <path d="M 282.793412 202.525975 
+L 422.806588 169.971038 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="204.819066" transform="rotate(-0 270.064941 204.819066)">#4  Meta Muse Wonder  (2.629, 125 words)</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="172.264129" transform="rotate(-0 435.535059 172.264129)">#3  Meta Muse Wonder  (+0.020)</text>
+   </g>
+   <g id="line2d_6">
+    <path d="M 282.793412 235.080911 
+L 422.806588 235.080911 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="237.374002" transform="rotate(-0 270.064941 237.374002)">#5  GPT-6 Astra  (2.492, 91 words)</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="237.374002" transform="rotate(-0 435.535059 237.374002)">#5  GPT-6 Astra  (-0.043)</text>
+   </g>
+   <g id="line2d_7">
+    <path d="M 282.793412 267.635848 
+L 422.806588 202.525975 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="269.928939" transform="rotate(-0 270.064941 269.928939)">#6  Kimi K3.1 Pro  (2.392, 60 words)</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="204.819066" transform="rotate(-0 435.535059 204.819066)">#4  Kimi K3.1 Pro  (-0.019)</text>
+   </g>
+   <g id="line2d_8">
+    <path d="M 282.793412 300.190785 
+L 422.806588 267.635848 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #9e9487; stroke-opacity: 0.78; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #4b433b" x="270.064941" y="302.483876" transform="rotate(-0 270.064941 302.483876)">#7  GPT-6.2 Astra  (2.387, 80 words)</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="435.535059" y="269.928939" transform="rotate(-0 435.535059 269.928939)">#6  GPT-6.2 Astra  (-0.120)</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="mb39a824267" d="M 0 2.915476 
+C 0.773193 2.915476 1.514823 2.608283 2.061553 2.061553 
+C 2.608283 1.514823 2.915476 0.773193 2.915476 0 
+C 2.915476 -0.773193 2.608283 -1.514823 2.061553 -2.061553 
+C 1.514823 -2.608283 0.773193 -2.915476 0 -2.915476 
+C -0.773193 -2.915476 -1.514823 -2.608283 -2.061553 -2.061553 
+C -2.608283 -1.514823 -2.915476 -0.773193 -2.915476 0 
+C -2.915476 0.773193 -2.608283 1.514823 -2.061553 2.061553 
+C -1.514823 2.608283 -0.773193 2.915476 0 2.915476 
+z
+" style="stroke: #f1eadc; stroke-width: 0.8"/>
+    </defs>
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="104.861165" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="104.861165" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="169.971038" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="137.416101" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="202.525975" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="169.971038" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="235.080911" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="235.080911" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="267.635848" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="202.525975" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="PathCollection_6">
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#mb39a824267" x="282.793412" y="300.190785" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#mb39a824267" x="422.806588" y="267.635848" style="fill: #9e9487; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="line2d_9">
+    <path d="M 282.793412 137.416101 
+L 422.806588 300.190785 
+" clip-path="url(#pd171568419)" style="fill: none; stroke: #680f0d; stroke-width: 3.2; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_7">
+    <defs>
+     <path id="m21f7523c83" d="M 0 3.741657 
+C 0.992299 3.741657 1.94409 3.347413 2.645751 2.645751 
+C 3.347413 1.94409 3.741657 0.992299 3.741657 0 
+C 3.741657 -0.992299 3.347413 -1.94409 2.645751 -2.645751 
+C 1.94409 -3.347413 0.992299 -3.741657 0 -3.741657 
+C -0.992299 -3.741657 -1.94409 -3.347413 -2.645751 -2.645751 
+C -3.347413 -1.94409 -3.741657 -0.992299 -3.741657 0 
+C -3.741657 0.992299 -3.347413 1.94409 -2.645751 2.645751 
+C -1.94409 3.347413 -0.992299 3.741657 0 3.741657 
+z
+" style="stroke: #f1eadc; stroke-width: 0.8"/>
+    </defs>
+    <g clip-path="url(#pd171568419)">
+     <use xlink:href="#m21f7523c83" x="282.793412" y="137.416101" style="fill: #680f0d; stroke: #f1eadc; stroke-width: 0.8"/>
+     <use xlink:href="#m21f7523c83" x="422.806588" y="300.190785" style="fill: #680f0d; stroke: #f1eadc; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="text_17">
+    <g id="patch_3">
+     <path d="M 362.725624 223.818209 
+L 401.334217 223.818209 
+L 401.334217 212.48648 
+L 362.725624 212.48648 
+z
+" style="fill: #f1eadc"/>
+    </g>
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="364.255624" y="220.445435" transform="rotate(-0 364.255624 220.445435)">-5 ranks</text>
+   </g>
+  </g>
+  <g id="text_18">
+   <text style="font-weight: 700; font-size: 12.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="28.224" y="22.915437" transform="rotate(-0 28.224 22.915437)">Automated clarity models largely reward length: verbose Qwen4 Max falls from #2 to #7</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 9.1px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="28.224" y="39.031297" transform="rotate(-0 28.224 39.031297)">Word count, task and role explain 53.5% of clarity variance across 9,568 live turns scored by three independent decision models</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd171568419">
+   <rect x="28.224" y="60.912" width="649.152" height="257.184"/>
+  </clipPath>
+ </defs>
+</svg>
