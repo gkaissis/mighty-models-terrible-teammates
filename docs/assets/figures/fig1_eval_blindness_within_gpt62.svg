@@ -311,7 +311,7 @@ z
     <text style="font-size: 8.2px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="129.540365" y="80.115066" transform="rotate(-0 129.540365 80.115066)">vs.</text>
    </g>
    <g id="text_18">
-    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="147.9558" y="80.115066" transform="rotate(-0 147.9558 80.115066)">withheld rules</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="147.9558" y="80.115066" transform="rotate(-0 147.9558 80.115066)">under-informed</text>
    </g>
    <g id="text_19">
     <text style="font-size: 7.9px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="225.300626" y="80.179487" transform="rotate(-0 225.300626 80.179487)">(matched length: 49 vs. 45 words/turn)</text>
@@ -662,7 +662,7 @@ L 847.656 291.024
     <text style="font-weight: 700; font-size: 7.8px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #08252b" x="723.783427" y="80.201784" transform="rotate(-0 723.783427 80.201784)">Prefers discloser (exact ties)</text>
    </g>
    <g id="text_54">
-    <text style="font-weight: 700; font-size: 10.1px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="545.527773" y="65.984" transform="rotate(-0 545.527773 65.984)">B. Models hide their own rules yet demand them</text>
+    <text style="font-weight: 700; font-size: 10.1px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="545.527773" y="65.984" transform="rotate(-0 545.527773 65.984)">B. Models under-inform yet demand partner rules</text>
    </g>
    <g id="PathCollection_3">
     <defs>
@@ -758,7 +758,7 @@ z
    </g>
   </g>
   <g id="text_55">
-   <text style="font-weight: 700; font-size: 12.8px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="39.528" y="23.21725" transform="rotate(-0 39.528 23.21725)">Standard evaluations miss withheld constraints while peer comparisons catch them</text>
+   <text style="font-weight: 700; font-size: 12.8px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="39.528" y="23.218" transform="rotate(-0 39.528 23.218)">Standard evaluations miss under-informing while peer comparisons catch it</text>
   </g>
   <g id="text_56">
    <text style="font-size: 9.1px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="39.528" y="39.031297" transform="rotate(-0 39.528 39.031297)">Config Repair: perfect 1.00-score runs by GPT-6.2 Astra (left) and what four models share vs. demand on exact ties (right)</text>

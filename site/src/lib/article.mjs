@@ -1,15 +1,18 @@
-// The two plugins that turn a plain Markdown post into the article layout.
+// The two plugins that turn a plain Markdown post into the HTAIL house style v2 article layout.
 //
 // remarkArticle (Markdown tree):
 //   :::figure{src="../figures/x.png" alt="..." .wide}   -> <figure> with an optimised image and a caption
 //   :::aside                                             -> an unnumbered margin note
+//   :::quote{speaker="..." meta="..." accent="teal"}     -> speaker-attributed model quotation block
+//   :::fold{summary="..."}                               -> collapsible editorial disclosure block
 //   [@key] and [@a; @b]                                  -> citation markers, resolved from refs.bib
-//   reading time                                         -> frontmatter.minutes
 //
 // rehypeArticle (HTML tree):
 //   footnotes and citations become numbered notes in the margin column, beside the paragraph that cites them;
 //   margin figures and asides join the margin of the block before them; figures are numbered;
-//   tables get a scroll wrapper; the last paragraph gets the end mark.
+//   tables get a scroll wrapper and styled captions; code/prompt blocks get line numbers, wrap & copy chrome;
+//   Appendix subsections fold by default; internal cross-references become colour-coded underlined links;
+//   the last paragraph of running text gets the end mark.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,6 +21,7 @@ import { formatReference, parseBibtex, shortRef } from './bibtex.mjs';
 const warn = (file, message) => console.warn('[article] ' + (file.path ? path.relative(process.cwd(), file.path) + ': ' : '') + message);
 
 const CITE = /\[((?:@[\w:.+/-]+)(?:\s*;\s*@[\w:.+/-]+)*)\]/g;
+const QUOTE_ACCENTS = new Set(['teal', 'red', 'forest', 'ochre', 'neutral']);
 
 function walk(node, fn, parent = null, index = 0) {
   if (fn(node, parent, index) === false) return;
@@ -29,7 +33,6 @@ function walk(node, fn, parent = null, index = 0) {
 export function remarkArticle() {
   return (tree, file) => {
     const source = String(file.value ?? '');
-    let words = 0;
 
     const raw = (node) => {
       const p = node.position;
@@ -50,14 +53,23 @@ export function remarkArticle() {
           next.push(child);
           continue;
         }
+        if (child.type === 'containerDirective' && child.name === 'quote') {
+          visit(child);
+          next.push(quote(child, file));
+          continue;
+        }
+        if (child.type === 'containerDirective' && child.name === 'fold') {
+          visit(child);
+          next.push(fold(child));
+          continue;
+        }
         if (child.type === 'textDirective' || child.type === 'leafDirective' || child.type === 'containerDirective') {
           // Not one of ours: put the author's text back exactly as written.
-          const text = { type: 'text', value: raw(child) };
-          next.push(child.type === 'textDirective' ? text : { type: 'paragraph', children: [text] });
+          const t = { type: 'text', value: raw(child) };
+          next.push(child.type === 'textDirective' ? t : { type: 'paragraph', children: [t] });
           continue;
         }
         if (child.type === 'text') {
-          words += (child.value.match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
           next.push(...cites(child));
           continue;
         }
@@ -67,10 +79,6 @@ export function remarkArticle() {
       node.children = next;
     };
     visit(tree);
-
-    file.data.astro ??= {};
-    file.data.astro.frontmatter ??= {};
-    file.data.astro.frontmatter.minutes = Math.max(1, Math.round(words / 230));
   };
 }
 
@@ -115,19 +123,102 @@ function figure(node, file) {
   };
 }
 
+function quote(node, file) {
+  const a = node.attributes || {};
+  const speaker = (a.speaker || '').trim();
+  const meta = (a.meta || '').trim();
+  let accent = (a.accent || 'teal').trim().toLowerCase();
+  if (!QUOTE_ACCENTS.has(accent)) {
+    warn(file, ':::quote unknown accent "' + accent + '" (expected teal, red, forest, ochre or neutral)');
+    accent = 'teal';
+  }
+  const children = [...(node.children || [])];
+  if (speaker || meta) {
+    const headerChildren = [];
+    if (speaker) {
+      headerChildren.push({
+        type: 'quoteSpeaker',
+        data: { hName: 'span', hProperties: { className: ['quote-speaker'] } },
+        children: [{ type: 'text', value: speaker }],
+      });
+    }
+    if (speaker && meta) {
+      headerChildren.push({ type: 'text', value: ' ' });
+    }
+    if (meta) {
+      headerChildren.push({
+        type: 'quoteMeta',
+        data: { hName: 'span', hProperties: { className: ['quote-meta'] } },
+        children: [{ type: 'text', value: meta }],
+      });
+    }
+    children.unshift({
+      type: 'quoteHeader',
+      data: { hName: 'div', hProperties: { className: ['quote-header'] } },
+      children: headerChildren,
+    });
+  }
+  return {
+    type: 'containerDirective',
+    name: 'quote',
+    data: { hName: 'blockquote', hProperties: { className: ['model-quote', 'accent-' + accent] } },
+    children,
+  };
+}
+
+function fold(node) {
+  const a = node.attributes || {};
+  const summary = (a.summary || 'Details').trim();
+  const isOpen = a.open != null && a.open !== 'false';
+  return {
+    type: 'containerDirective',
+    name: 'fold',
+    data: { hName: 'details', hProperties: { className: ['body-fold'], ...(isOpen ? { open: true } : {}) } },
+    children: [
+      {
+        type: 'foldSummary',
+        data: { hName: 'summary', hProperties: { className: ['body-fold-sum'] } },
+        children: [{ type: 'text', value: summary }],
+      },
+      {
+        type: 'foldBody',
+        data: { hName: 'div', hProperties: { className: ['body-fold-body'] } },
+        children: [...(node.children || [])],
+      },
+    ],
+  };
+}
+
 // ---------------------------------------------------------------- rehype
 
 const el = (tagName, properties = {}, children = []) => ({ type: 'element', tagName, properties, children });
 const text = (value) => ({ type: 'text', value });
-const has = (node, cls) => node.type === 'element' && [].concat(node.properties?.className || []).includes(cls);
-const blank = (node) => node.type === 'text' && !node.value.trim();
+const has = (node, cls) => {
+  if (node?.type !== 'element') return false;
+  const cn = node.properties?.className;
+  if (cn && [].concat(cn).includes(cls)) return true;
+  const c = node.properties?.class;
+  if (typeof c === 'string') return c.split(/\s+/).includes(cls);
+  if (Array.isArray(c)) return c.includes(cls);
+  return false;
+};
+const blank = (node) => node?.type === 'text' && !node.value.trim();
 
 const plainText = (node) => {
   if (!node) return '';
   if (Array.isArray(node)) return node.map(plainText).join('');
   if (node.type === 'text') return node.value;
   if (node.type === 'element') {
-    if (has(node, 'katex-mathml') || has(node, 'on-paper')) return '';
+    if (
+      node.tagName === 'math' ||
+      node.tagName === 'mjx-container' ||
+      node.tagName === 'mjx-assistive-mml' ||
+      has(node, 'sr-only') ||
+      has(node, 'on-paper')
+    ) {
+      return '';
+    }
+    if (has(node, 'math')) return node.data?.mathText ?? '';
     return plainText(node.children || []);
   }
   return '';
@@ -142,7 +233,49 @@ const teaserText = (s, max = 78) => {
 };
 
 const FOLD_NOTE_CHARS = 220;
-const XREF_RE = /\b(Sections?\s+\d+(?:\s*(?:and|[–-])\s*\d+)?|Appendices\s+[A-E]\s*(?:and|[–-])\s*[A-E]|Appendix\s+[A-E]|Figures?\s+\d+(?:\s*(?:and|[–-])\s*\d+)?|Tables?\s+(?:[1-9]|[A-E]\d+)(?:\s*(?:and|[–-])\s*(?:[1-9]|[A-E]\d+))?)\b/g;
+const TABLE_CAP_RE = /^\s*Table\s+([A-Z]?\d+)\s*([:.])\s*/;
+const APPENDIX_RE = /^\s*Appendix\s+([A-Z])\s*[:.]/i;
+const XREF_RE = /\b(Sections?\s+\d+(?:\s*(?:and|[–-])\s*\d+)?|Appendices\s+[A-Z]\s*(?:and|[–-])\s*[A-Z]|Appendix\s+[A-Z]|Figures?\s+\d+(?:\s*(?:and|[–-])\s*\d+)?|Tables?\s+[A-Z]?\d+(?:\s*(?:and|[–-])\s*[A-Z]?\d+)?)\b/g;
+
+const LANG_LABELS = {
+  text: 'Prompt / Text',
+  plaintext: 'Prompt / Text',
+  plain: 'Prompt / Text',
+  txt: 'Prompt / Text',
+  bash: 'Bash',
+  sh: 'Shell',
+  shell: 'Shell',
+  zsh: 'Zsh',
+  python: 'Python',
+  py: 'Python',
+  json: 'JSON',
+  jsonc: 'JSON',
+  yaml: 'YAML',
+  yml: 'YAML',
+  js: 'JavaScript',
+  javascript: 'JavaScript',
+  ts: 'TypeScript',
+  typescript: 'TypeScript',
+  md: 'Markdown',
+  markdown: 'Markdown',
+  sql: 'SQL',
+  html: 'HTML',
+  css: 'CSS',
+  tex: 'LaTeX',
+  latex: 'LaTeX',
+  bibtex: 'BibTeX',
+  bib: 'BibTeX',
+  diff: 'Diff',
+};
+
+const WRAP_ON_LANGS = new Set(['', 'text', 'plaintext', 'plain', 'txt', 'markdown', 'md']);
+
+function langLabel(lang) {
+  if (!lang) return 'Prompt / Text';
+  const low = lang.toLowerCase();
+  if (LANG_LABELS[low]) return LANG_LABELS[low];
+  return low.length <= 3 ? low.toUpperCase() : low[0].toUpperCase() + low.slice(1);
+}
 
 const headingSlug = (s) =>
   s
@@ -150,6 +283,164 @@ const headingSlug = (s) =>
     .replace(/[^\p{L}\p{N}\s-]/gu, '')
     .trim()
     .replace(/\s+/g, '-');
+
+function formatTableCaption(pNode, tableId) {
+  pNode.properties = pNode.properties || {};
+  pNode.properties.className = [...[].concat(pNode.properties.className || []), 'table-caption'];
+  if (tableId) pNode.data = { ...(pNode.data || {}), selfTableId: tableId };
+
+  // Unwrap a single outer <em> so caption prose sets upright like <figcaption>.
+  const solid = (pNode.children || []).filter((c) => !blank(c));
+  if (solid.length === 1 && solid[0].type === 'element' && solid[0].tagName === 'em') {
+    pNode.children = solid[0].children || [];
+  }
+
+  // Style leading "Table X:" as italic <span class="table-n">Table X.</span>.
+  for (let i = 0; i < (pNode.children || []).length; i++) {
+    const ch = pNode.children[i];
+    if (ch.type === 'text') {
+      const m = TABLE_CAP_RE.exec(ch.value);
+      if (m) {
+        const rest = ch.value.slice(m[0].length);
+        const replacement = [el('span', { className: ['table-n'] }, [text('Table ' + m[1] + '.')])];
+        if (rest) replacement.push(text(' ' + rest));
+        pNode.children.splice(i, 1, ...replacement);
+      }
+      break;
+    }
+    if (!blank(ch)) break;
+  }
+}
+
+function wrapCodeBoxes(root) {
+  const visit = (node) => {
+    if (!node || !node.children) return;
+    if (node.type === 'element' && has(node, 'codebox')) return;
+    for (let i = 0; i < node.children.length; i++) {
+      const child = node.children[i];
+      if (child.type === 'element' && child.tagName === 'pre' && !has(child, 'citebox')) {
+        node.children[i] = buildCodeBox(child);
+      } else {
+        visit(child);
+      }
+    }
+  };
+  visit(root);
+}
+
+function buildCodeBox(pre) {
+  const props = pre.properties || {};
+  let lang = String(props.dataLanguage || '').trim().toLowerCase();
+  const code = (pre.children || []).find((c) => c.type === 'element' && c.tagName === 'code');
+
+  if (!lang && code) {
+    for (const cls of [].concat(code.properties?.className || [])) {
+      const m = /^language-(\S+)$/i.exec(String(cls));
+      if (m) {
+        lang = m[1].toLowerCase();
+        break;
+      }
+    }
+  }
+
+  let lineCount = 0;
+  if (code) {
+    const hasShikiLines = (code.children || []).some((c) => has(c, 'line'));
+    if (hasShikiLines) {
+      // Remove inter-line newline text nodes so display:block .line elements never double-space.
+      const lines = (code.children || []).filter((c) => !(c.type === 'text' && /^\r?\n$/.test(c.value)));
+      // Trim a single trailing empty Shiki line.
+      if (lines.length > 1) {
+        const last = lines[lines.length - 1];
+        if (has(last, 'line') && plainText(last) === '') lines.pop();
+      }
+      code.children = lines;
+      lineCount = lines.filter((c) => has(c, 'line')).length;
+    } else {
+      const raw = plainText(code).replace(/\r\n/g, '\n').replace(/\n$/, '');
+      const split = raw.split('\n');
+      code.children = split.map((line) => el('span', { className: ['line'] }, line ? [text(line)] : []));
+      lineCount = split.length;
+    }
+  }
+
+  const wrapped = WRAP_ON_LANGS.has(lang);
+  const hasLines = lineCount >= 2;
+  const boxClasses = ['codebox'];
+  if (wrapped) boxClasses.push('is-wrapped');
+  if (hasLines) boxClasses.push('has-lines');
+
+  return el(
+    'div',
+    {
+      className: boxClasses,
+      dataLang: lang || 'text',
+      dataWrap: wrapped ? 'on' : 'off',
+    },
+    [
+      el('div', { className: ['codebox-bar'] }, [
+        el('span', { className: ['codebox-lang'] }, [text(langLabel(lang))]),
+        el('div', { className: ['codebox-actions'] }, [
+          el(
+            'button',
+            {
+              className: ['codebox-btn'],
+              type: 'button',
+              dataWrapToggle: '',
+              ariaPressed: wrapped ? 'true' : 'false',
+            },
+            [text(wrapped ? 'Wrap: on' : 'Wrap: off')],
+          ),
+          el(
+            'button',
+            {
+              className: ['codebox-btn'],
+              type: 'button',
+              dataCopyCode: '',
+            },
+            [text('Copy')],
+          ),
+        ]),
+      ]),
+      pre,
+    ],
+  );
+}
+
+function foldAppendices(nodes) {
+  const result = [];
+  let i = 0;
+  while (i < nodes.length) {
+    const node = nodes[i];
+    if (node.type === 'element' && node.tagName === 'h3' && APPENDIX_RE.test(plainText(node))) {
+      node.properties = node.properties || {};
+      node.properties.className = [...[].concat(node.properties.className || []), 'appendix-label'];
+      const body = [];
+      i++;
+      while (i < nodes.length) {
+        const cur = nodes[i];
+        if (cur.type === 'element' && (cur.tagName === 'h2' || cur.tagName === 'h3' || cur.tagName === 'hr')) {
+          break;
+        }
+        body.push(cur);
+        i++;
+      }
+      result.push(
+        el('details', { className: ['appendix-fold'] }, [
+          el('summary', { className: ['appendix-sum'] }, [
+            node,
+            el('span', { className: ['appendix-toggle'], ariaHidden: 'true' }, []),
+          ]),
+          el('div', { className: ['appendix-body'] }, body),
+        ]),
+      );
+      continue;
+    }
+    result.push(node);
+    i++;
+  }
+  return result;
+}
 
 export function rehypeArticle(options = {}) {
   const bibPath = path.resolve(options.bibliography || 'refs.bib');
@@ -190,10 +481,11 @@ export function rehypeArticle(options = {}) {
       return el('figure', { className: ['fig'] }, caption ? [img, el('figcaption', {}, [text(String(caption))])] : [img]);
     });
 
-    // 3. Number the notes in reading order and seat each one beside its block.
+    // 3. Number the notes in reading order, wrap tables & captions, and seat each note beside its block.
     let n = 0;
     let figures = 0;
-    const seen = new Map();   // footnote id or citation key -> number already given
+    const seen = new Map(); // footnote id or citation key -> number already given
+    const captionNodes = new Map(); // caption <p> node -> tableId
     const out = [];
     let lastBlock = -1;
 
@@ -286,19 +578,25 @@ export function rehypeArticle(options = {}) {
           cap.children.unshift(el('span', { className: ['fig-n'] }, [text('Figure ' + figures + '.')]), text(' '));
         }
       }
+
       if (node.tagName === 'table') {
         let tableId = null;
         for (let j = idx + 1; j < tree.children.length; j++) {
           const sib = tree.children[j];
           if (sib.type === 'element') {
             if (sib.tagName === 'p') {
-              const m = /^\s*Table\s+([1-9]|[A-E]\d+)\s*:/.exec(plainText(sib));
-              if (m) tableId = 'table-' + m[1].toLowerCase();
+              const m = TABLE_CAP_RE.exec(plainText(sib));
+              if (m) {
+                tableId = 'table-' + m[1].toLowerCase();
+                captionNodes.set(sib, tableId);
+              }
             }
             break;
           }
         }
         node = el('div', { className: ['table-wrap'], ...(tableId ? { id: tableId } : {}) }, [node]);
+      } else if (captionNodes.has(node)) {
+        formatTableCaption(node, captionNodes.get(node));
       }
 
       const floating = has(node, 'unnumbered') || (has(node, 'fig') && has(node, 'margin'));
@@ -315,19 +613,35 @@ export function rehypeArticle(options = {}) {
       if (notes.length) toRow(out.length - 1).children.push(...notes);
     }
 
-    // 4. End mark after the last paragraph of running text.
-    for (let i = out.length - 1; i >= 0; i--) {
-      const node = out[i];
-      if (node.type !== 'element') continue;
+    // 4. Wrap verbatim code & prompt blocks with header chrome, wrap toggle, copy button and line numbers.
+    const folded = foldAppendices(out);
+    wrapCodeBoxes({ type: 'root', children: folded });
+
+    // 5. End mark after the last paragraph of main running text (outside folded appendices and table captions).
+    let placedEndmark = false;
+    for (let i = folded.length - 1; i >= 0; i--) {
+      const node = folded[i];
+      if (node.type !== 'element' || has(node, 'appendix-fold')) continue;
       const p = node.tagName === 'p' ? node : has(node, 'row') && node.children[0].children[0]?.tagName === 'p' ? node.children[0].children[0] : null;
-      if (!p) continue;
+      if (!p || has(p, 'table-caption')) continue;
       p.children.push(el('span', { className: ['endmark'], ariaHidden: 'true' }, []));
+      placedEndmark = true;
       break;
     }
+    if (!placedEndmark) {
+      for (let i = out.length - 1; i >= 0; i--) {
+        const node = out[i];
+        if (node.type !== 'element') continue;
+        const p = node.tagName === 'p' ? node : has(node, 'row') && node.children[0].children[0]?.tagName === 'p' ? node.children[0].children[0] : null;
+        if (!p || has(p, 'table-caption')) continue;
+        p.children.push(el('span', { className: ['endmark'], ariaHidden: 'true' }, []));
+        break;
+      }
+    }
 
-    // 5. Turn internal section, appendix, figure and table references into jump lozenges.
+    // 6. Turn internal section, appendix, figure and table references into colour-coded underlined links.
     const targets = new Map();
-    for (const root of out) {
+    for (const root of folded) {
       walk(root, (node) => {
         if (node.type !== 'element') return;
         if (node.tagName === 'h2') {
@@ -339,7 +653,7 @@ export function rehypeArticle(options = {}) {
           }
         } else if (node.tagName === 'h3') {
           const title = plainText(node);
-          const m = /^\s*Appendix\s+([A-E])\s*:/i.exec(title);
+          const m = APPENDIX_RE.exec(title);
           if (m) {
             const id = node.properties?.id ? String(node.properties.id) : headingSlug(title);
             targets.set('appendix ' + m[1].toLowerCase(), { href: '#' + id, cls: 'xref-app' });
@@ -350,7 +664,7 @@ export function rehypeArticle(options = {}) {
           if (m) targets.set('figure ' + m[1], { href: '#' + id, cls: 'xref-fig' });
         } else if (node.tagName === 'div' && has(node, 'table-wrap') && node.properties?.id) {
           const id = String(node.properties.id);
-          const m = /^table-([a-e]?\d+)$/.exec(id);
+          const m = /^table-([a-z]?\d+)$/.exec(id);
           if (m) targets.set('table ' + m[1], { href: '#' + id, cls: 'xref-tbl' });
         }
       });
@@ -371,7 +685,7 @@ export function rehypeArticle(options = {}) {
         const full = m[0];
         const after = value.slice(m.index + full.length);
         // Do not turn a table caption's own leading "Table X:" label into a link.
-        if (/^Table\s+(?:[1-9]|[A-E]\d+)$/.test(full) && /^\s*:/.test(after)) continue;
+        if (/^Table\s+[A-Z]?\d+$/.test(full) && /^\s*:/.test(after)) continue;
 
         let pieces = null;
         let sub;
@@ -381,7 +695,7 @@ export function rehypeArticle(options = {}) {
             text(sub[3]),
             makeXref('section', sub[4], 'Section ' + sub[4], selfId),
           ];
-        } else if ((sub = /^Appendices\s+([A-E])(\s*(?:and|[–-])\s*)([A-E])$/.exec(full))) {
+        } else if ((sub = /^Appendices\s+([A-Z])(\s*(?:and|[–-])\s*)([A-Z])$/.exec(full))) {
           pieces = [
             makeXref('appendix', sub[1], 'Appendix ' + sub[1], selfId),
             text(sub[2]),
@@ -393,7 +707,7 @@ export function rehypeArticle(options = {}) {
             text(sub[3]),
             makeXref('figure', sub[4], 'Figure ' + sub[4], selfId),
           ];
-        } else if ((sub = /^(Tables?)\s+([1-9]|[A-E]\d+)(\s*(?:and|[–-])\s*)([1-9]|[A-E]\d+)$/.exec(full))) {
+        } else if ((sub = /^(Tables?)\s+([A-Z]?\d+)(\s*(?:and|[–-])\s*)([A-Z]?\d+)$/.exec(full))) {
           pieces = [
             makeXref('table', sub[2], 'Table ' + sub[2], selfId),
             text(sub[3]),
@@ -401,11 +715,11 @@ export function rehypeArticle(options = {}) {
           ];
         } else if ((sub = /^Section\s+(\d+)$/.exec(full))) {
           pieces = [makeXref('section', sub[1], full, selfId)];
-        } else if ((sub = /^Appendix\s+([A-E])$/.exec(full))) {
+        } else if ((sub = /^Appendix\s+([A-Z])$/.exec(full))) {
           pieces = [makeXref('appendix', sub[1], full, selfId)];
         } else if ((sub = /^Figure\s+(\d+)$/.exec(full))) {
           pieces = [makeXref('figure', sub[1], full, selfId)];
-        } else if ((sub = /^Table\s+([1-9]|[A-E]\d+)$/.exec(full))) {
+        } else if ((sub = /^Table\s+([A-Z]?\d+)$/.exec(full))) {
           pieces = [makeXref('table', sub[1], full, selfId)];
         }
 
@@ -420,11 +734,23 @@ export function rehypeArticle(options = {}) {
       return nodes;
     };
 
-    const SKIP_TAGS = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'code', 'pre', 'summary']);
+    const SKIP_TAGS = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'code', 'pre', 'summary', 'math', 'mjx-container', 'mjx-assistive-mml']);
     const applyXrefs = (node, selfId = null) => {
       if (!node || node.type !== 'element' || !node.children) return;
-      if (SKIP_TAGS.has(node.tagName) || has(node, 'katex') || has(node, 'fig-n')) return;
-      const nextSelf = (node.tagName === 'figure' && node.properties?.id) ? String(node.properties.id) : selfId;
+      if (
+        SKIP_TAGS.has(node.tagName) ||
+        has(node, 'math') ||
+        has(node, 'sr-only') ||
+        has(node, 'fig-n') ||
+        has(node, 'table-n') ||
+        has(node, 'codebox-bar') ||
+        has(node, 'quote-header')
+      ) {
+        return;
+      }
+      let nextSelf = selfId;
+      if (node.tagName === 'figure' && node.properties?.id) nextSelf = String(node.properties.id);
+      else if (has(node, 'table-caption') && node.data?.selfTableId) nextSelf = String(node.data.selfTableId);
       const next = [];
       for (const child of node.children) {
         if (child.type === 'text') {
@@ -438,8 +764,8 @@ export function rehypeArticle(options = {}) {
       }
       node.children = next;
     };
-    for (const root of out) applyXrefs(root);
+    for (const root of folded) applyXrefs(root);
 
-    tree.children = out;
+    tree.children = folded;
   };
 }

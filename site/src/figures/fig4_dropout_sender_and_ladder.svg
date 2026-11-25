@@ -456,14 +456,14 @@ z
    </g>
    <g id="text_34">
     <g id="patch_13">
-     <path d="M 130.43906 297.315188 
-L 220.23306 297.315188 
-L 220.23306 287.942696 
+     <path d="M 130.43906 297.315634 
+L 227.159748 297.315634 
+L 227.159748 287.942696 
 L 130.43906 287.942696 
 z
 " style="fill: #f1eadc"/>
     </g>
-    <text style="font-weight: 700; font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="131.42706" y="294.678938" transform="rotate(-0 131.42706 294.678938)">Usually withheld rules</text>
+    <text style="font-weight: 700; font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="131.42706" y="294.679384" transform="rotate(-0 131.42706 294.679384)">Usually under-informed</text>
    </g>
   </g>
   <g id="axes_2">
@@ -911,7 +911,7 @@ z
     <text style="font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4b433b" x="754.480204" y="105.821915" transform="rotate(-0 754.480204 105.821915)">Verbatim rules (upper bound)</text>
    </g>
    <g id="text_69">
-    <text style="font-weight: 700; font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="606.185897" y="119.378923" transform="rotate(-0 606.185897 119.378923)">Teammate withheld rules (&lt;5, n=44)</text>
+    <text style="font-weight: 700; font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #4a0908" x="606.185897" y="119.378923" transform="rotate(-0 606.185897 119.378923)">Teammate under-informed (&lt;5, n=44)</text>
    </g>
    <g id="text_70">
     <text style="font-weight: 700; font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #08252b" x="787.434495" y="119.378923" transform="rotate(-0 787.434495 119.378923)">Teammate shared rules (≥5, n=116)</text>
@@ -1139,7 +1139,7 @@ z
    </g>
   </g>
   <g id="text_74">
-   <text style="font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #5e564d" x="921.888" y="402.437437" transform="rotate(-0 921.888 402.437437)">*Gemini 4 Neon hit the 16k output token limit on 12 of 44 withheld handoffs (open circle = 88% on finished replies)</text>
+   <text style="font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #5e564d" x="921.888" y="402.437437" transform="rotate(-0 921.888 402.437437)">*Gemini 4 Neon hit the 16k output token limit on 12 of 44 under-informed handoffs (open circle = 88% on finished replies)</text>
   </g>
   <g id="text_75">
    <text style="font-weight: 700; font-size: 12.6px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start" x="38.016" y="26.090719" transform="rotate(-0 38.016 26.090719)">When a teammate drops out, proactive rule sharing separates success from failure</text>

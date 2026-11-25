@@ -1,6 +1,6 @@
 # Mighty Models, Terrible Teammates
 
-Code, deterministic verifiers, transcripts, causal crossover experiments, publication figures, and full offline reproducibility package accompanying the technical report **Mighty Models, Terrible Teammates** (George Kaissis and Florian Hölzl, Human-Centred Transformative AI Lab (HTAIL), Hasso-Plattner Institute, 25 November 2026).
+Code, deterministic verifiers, transcripts, causal crossover experiments, publication figures, and full offline reproducibility package accompanying the technical report **Mighty Models, Terrible Teammates** (George Kaissis and Florian A. Hölzl, Human-Centred Transformative AI Lab (HTAIL), Hasso-Plattner Institute, 25th of November 2026).
 
 - **Web Report (GitHub Pages):** <https://gkaissis.github.io/mighty-models-terrible-teammates/> (Astro source in [`site/`](site/))
 - **Markdown Companion:** [`docs/blog_post.md`](docs/blog_post.md)

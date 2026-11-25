@@ -1,8 +1,5 @@
 // Front matter helpers for the article layout.
 
-const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
-  'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
-
 const LICENSES = {
   'cc by 4.0': 'https://creativecommons.org/licenses/by/4.0/',
   'cc by-sa 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -20,20 +17,33 @@ export function toDate(value) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-/** 22 November 2026 */
+function ordinal(day) {
+  const mod100 = day % 100;
+  if (mod100 >= 11 && mod100 <= 13) return day + 'th';
+  const mod10 = day % 10;
+  if (mod10 === 1) return day + 'st';
+  if (mod10 === 2) return day + 'nd';
+  if (mod10 === 3) return day + 'rd';
+  return day + 'th';
+}
+
+/** 25th of November 2026 */
 export function longDate(value) {
   const d = toDate(value);
-  return d ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(d) : '';
+  if (!d) return '';
+  const day = ordinal(d.getUTCDate());
+  const month = new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(d);
+  return `${day} of ${month} ${d.getUTCFullYear()}`;
 }
 
 export const isoDate = (value) => toDate(value)?.toISOString().slice(0, 10) ?? '';
 
-/** "a four-minute read" */
-export function readingTime(minutes) {
-  if (!minutes) return '';
-  const word = WORDS[minutes] ?? String(minutes);
-  const article = /^(eight|eleven|eighteen|8|11|18|8\d)/.test(word) ? 'an' : 'a';
-  return article + ' ' + word + '-minute read';
+/** Accepts a bare URL string or `{ url, label }` for dataset / preprint links. */
+export function linkItem(value, defaultLabel) {
+  if (!value) return null;
+  if (typeof value === 'string') return { url: value, label: defaultLabel };
+  if (typeof value === 'object' && value.url) return { url: String(value.url), label: String(value.label || defaultLabel) };
+  return null;
 }
 
 export function license(value) {

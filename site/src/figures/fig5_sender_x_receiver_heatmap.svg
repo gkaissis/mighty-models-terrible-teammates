@@ -69,28 +69,28 @@ iVBORw0KGgoAAAANSUhEUgAAAtAAAAFJCAYAAACy1hqKAAAHQElEQVR4nO3Yu2pUUQCG0USG3AYyYjeN
      <g id="text_5">
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(526.3875 121.528828)">Gemini 4</text>
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(525.091344 129.727328)">Hydrogen</text>
-      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(518.418188 138.157391)">Index 27 · low</text>
+      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(517.546563 138.157391)">Index 27 (low)</text>
      </g>
     </g>
     <g id="xtick_6">
      <g id="text_6">
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(590.112031 121.443922)">DeepSeek</text>
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(589.258812 129.873984)">V4.1 Flash</text>
-      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(584.866844 138.150266)">Index 19 · off</text>
+      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(583.995219 138.150266)">Index 19 (off)</text>
      </g>
     </g>
     <g id="xtick_7">
      <g id="text_7">
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(659.780594 122.206891)">Claude</text>
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(655.125 129.873984)">Haiku 5.5</text>
-      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(648.230969 138.148484)">Index 19 · low</text>
+      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(647.359344 138.148484)">Index 19 (low)</text>
      </g>
     </g>
     <g id="xtick_8">
      <g id="text_8">
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(725.213344 122.032328)">GPT-6</text>
       <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(727.569938 130.265266)">Luna</text>
-      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(711.953719 138.779047)">unscored · low</text>
+      <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif" transform="translate(711.082094 138.226266)">unscored (low)</text>
      </g>
     </g>
    </g>
@@ -251,9 +251,9 @@ L 84.50208 324.96849
     <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #08252b" transform="translate(54.447116 244.80302)">rules</text>
    </g>
    <g id="text_20">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(45.118991 345.794257)">Usually</text>
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(39.990866 353.818524)">withheld</text>
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(54.447116 361.842206)">rules</text>
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(45.118991 345.794037)">Usually</text>
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(47.883444 353.818305)">under-</text>
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Georgia', 'DejaVu Serif', serif; fill: #4a0908" transform="translate(37.814694 361.842426)">informed</text>
    </g>
    <g id="text_21">
     <text style="font-size: 7.6px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: end; fill: #5e564d" x="768.6" y="404.549199" transform="rotate(-0 768.6 404.549199)">*Gemini 4 Neon hit 16k output token limit (91% / 90% on finished replies)</text>

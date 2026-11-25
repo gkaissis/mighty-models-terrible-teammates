@@ -251,14 +251,14 @@ z
    </g>
    <g id="text_21">
     <g id="patch_12">
-     <path d="M 192.797492 258.359274 
-L 306.422179 258.359274 
-L 306.422179 248.789427 
+     <path d="M 192.797492 258.359708 
+L 321.592179 258.359708 
+L 321.592179 248.789427 
 L 192.797492 248.789427 
 z
 " style="fill: #f1eadc"/>
     </g>
-    <text style="font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="193.981492" y="255.570399" transform="rotate(-0 193.981492 255.570399)">Withholding partners (omit rules)</text>
+    <text style="font-size: 7.4px; font-family: 'Georgia', 'DejaVu Serif', serif; text-anchor: start; fill: #6a6158" x="193.981492" y="255.570833" transform="rotate(-0 193.981492 255.570833)">Under-informing partners (omit rules)</text>
    </g>
   </g>
   <g id="axes_2">

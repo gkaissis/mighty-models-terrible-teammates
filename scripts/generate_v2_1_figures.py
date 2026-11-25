@@ -11,6 +11,7 @@ All numeric values are loaded programmatically from the frozen summary JSONs and
 
 from __future__ import annotations
 
+import argparse
 import glob
 import json
 import logging
@@ -26,6 +27,7 @@ matplotlib.use("Agg")
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap
 
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
@@ -42,6 +44,7 @@ FIG_DIR = REPO_ROOT / "docs/assets/figures"
 DATA_DIR = REPO_ROOT / "docs/assets/data"
 SITE_FIG_DIR = REPO_ROOT / "site/src/figures"
 SITE_DATA_DIR = REPO_ROOT / "site/public/data"
+PDF_OUTPUT_DIR: Path | None = None
 
 # House editorial palette matching article-kit (warm ground #F1EADC, ink #000000, dark red/teal/forest/ochre)
 BG_WHITE = "#F1EADC"
@@ -119,10 +122,10 @@ RECEIVER_COL_LABEL: dict[str, str] = {
     "neon4": "Gemini 4 Neon\nIndex 61",
     "opus55": "Claude Opus 5.5\nIndex 59",
     "astra60": "GPT-6 Astra\nIndex 57",
-    "hydrogen": "Gemini 4\nHydrogen\nIndex 27 · low",
-    "deepseek_flash": "DeepSeek\nV4.1 Flash\nIndex 19 · off",
-    "haiku55": "Claude\nHaiku 5.5\nIndex 19 · low",
-    "gpt6_luna": "GPT-6\nLuna\nunscored · low",
+    "hydrogen": "Gemini 4\nHydrogen\nIndex 27 (low)",
+    "deepseek_flash": "DeepSeek\nV4.1 Flash\nIndex 19 (off)",
+    "haiku55": "Claude\nHaiku 5.5\nIndex 19 (low)",
+    "gpt6_luna": "GPT-6\nLuna\nunscored (low)",
 }
 
 MODEL_FAMILY: dict[str, str] = {
@@ -155,8 +158,27 @@ BANNED_FIGURE_PATTERNS: tuple[tuple[str, str], ...] = (
 )
 
 
-def configure_editorial_style() -> None:
+def apply_runtime_options(theme: str, pdf_dir: Path | None) -> None:
+    """Apply optional paper theme palette overrides and PDF-only export target."""
+    global BG_WHITE, TILE_CLEAN, ROW_TINT, BORDER, PDF_OUTPUT_DIR
+    PDF_OUTPUT_DIR = pdf_dir
+    if theme == "paper":
+        BG_WHITE = "#FFFFFF"
+        TILE_CLEAN = "#F7F5F0"
+        ROW_TINT = "#F5F3EE"
+        BORDER = "#DDD8CE"
+
+
+def configure_editorial_style(theme: str = "web", font_dir: Path | None = None) -> None:
     """Apply clean publication rcParams."""
+    serif_stack = ["Georgia", "DejaVu Serif"]
+    if font_dir is not None:
+        for font_file in sorted([*font_dir.glob("*.ttf"), *font_dir.glob("*.otf")]):
+            font_manager.fontManager.addfont(str(font_file))
+        serif_stack = ["Spectral", "Georgia", "DejaVu Serif"]
+    elif theme == "paper":
+        serif_stack = ["Spectral", "Georgia", "DejaVu Serif"]
+
     plt.rcParams.update(
         {
             "figure.facecolor": BG_WHITE,
@@ -164,8 +186,9 @@ def configure_editorial_style() -> None:
             "savefig.facecolor": BG_WHITE,
             "savefig.edgecolor": BG_WHITE,
             "font.family": "serif",
-            "font.serif": ["Georgia", "DejaVu Serif"],
+            "font.serif": serif_stack,
             "svg.fonttype": "none",
+            "pdf.fonttype": 42,
             "axes.edgecolor": BORDER,
             "axes.linewidth": 0.8,
             "axes.labelcolor": TEXT_BODY,
@@ -209,6 +232,8 @@ def style_axes(ax: plt.Axes, grid_axis: str | None = "x") -> None:
 def _check_text_hygiene(txt: str, ctx: str) -> None:
     if "\u2014" in txt:
         raise ValueError(f"Em-dash prohibited in {ctx}: {txt!r}")
+    if "\u00b7" in txt:
+        raise ValueError(f"Middle dot prohibited in {ctx}: {txt!r}")
     if ";" in txt:
         raise ValueError(f"Semicolon prohibited in {ctx}: {txt!r}")
     for pat, desc in BANNED_FIGURE_PATTERNS:
@@ -274,12 +299,25 @@ def assert_svg_text_clean(svg_path: Path) -> None:
 
 
 def save_figure_and_data(fig: plt.Figure, stem: str, payload: dict[str, Any]) -> None:
-    """Export SVG, 300-DPI PNG and companion JSON after checking text hygiene."""
+    """Export SVG, 300-DPI PNG and companion JSON (or PDF-only when --pdf-dir is set)."""
     for text_obj in fig.findobj(match=matplotlib.text.Text):
         txt = text_obj.get_text()
         if txt:
             _check_text_hygiene(txt, stem)
     assert_no_em_dashes(payload, stem)
+
+    if PDF_OUTPUT_DIR is not None:
+        PDF_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        pdf_path = PDF_OUTPUT_DIR / f"{stem}.pdf"
+        fig.savefig(
+            pdf_path,
+            format="pdf",
+            facecolor=BG_WHITE,
+            bbox_inches="tight",
+            pad_inches=0.08,
+        )
+        plt.close(fig)
+        return
 
     FIG_DIR.mkdir(parents=True, exist_ok=True)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -506,7 +544,7 @@ def build_fig1(meta: dict[str, Any]) -> None:
     # Inline colour-coded key replacing the redundant boxed legend
     ax_a.text(0.00, 1.03, "Shared rules", transform=ax_a.transAxes, ha="left", va="bottom", fontsize=8.2, fontweight="bold", color=TEAL_DEEP)
     ax_a.text(0.18, 1.03, "vs.", transform=ax_a.transAxes, ha="left", va="bottom", fontsize=8.2, color=MUTED)
-    ax_a.text(0.23, 1.03, "withheld rules", transform=ax_a.transAxes, ha="left", va="bottom", fontsize=8.2, fontweight="bold", color=VERMILION_DEEP)
+    ax_a.text(0.23, 1.03, "under-informed", transform=ax_a.transAxes, ha="left", va="bottom", fontsize=8.2, fontweight="bold", color=VERMILION_DEEP)
     ax_a.text(
         0.44,
         1.03,
@@ -606,7 +644,7 @@ def build_fig1(meta: dict[str, Any]) -> None:
     ax_b.set_xticklabels(["0%", "25%", "50%", "75%", "100%"])
     ax_b.set_xlabel("Rate (%)")
     ax_b.set_title(
-        "B. Models hide their own rules yet demand them",
+        "B. Models under-inform yet demand partner rules",
         loc="left",
         fontsize=10.1,
         fontweight="bold",
@@ -620,7 +658,7 @@ def build_fig1(meta: dict[str, Any]) -> None:
 
     add_header(
         fig,
-        title="Standard evaluations miss withheld constraints while peer comparisons catch them",
+        title="Standard evaluations miss under-informing while peer comparisons catch it",
         subtitle=(
             "Config Repair: perfect 1.00-score runs by GPT-6.2 Astra (left) and what four models share vs. demand on exact ties (right)"
         ),
@@ -1200,7 +1238,7 @@ def build_fig4_dropout(exp1: dict[str, Any], gate: dict[str, Any], exp1_rows: li
     ax_a.text(104.5, -0.34, "Completion", ha="left", va="bottom", fontsize=7.7, fontweight="bold", color=MUTED)
     ax_a.text(182.0, -0.34, "Avg. rules shared", ha="right", va="bottom", fontsize=7.7, fontweight="bold", color=MUTED)
     ax_a.axhline(5.16, color=MUTED_LIGHT, linestyle="--", linewidth=0.95, zorder=1)
-    ax_a.text(2.0, 5.36, "Usually withheld rules", ha="left", va="top", fontsize=7.6, fontweight="bold", color=VERMILION_DEEP, bbox={"facecolor": BG_WHITE, "edgecolor": "none", "pad": 1.0}, zorder=5)
+    ax_a.text(2.0, 5.36, "Usually under-informed", ha="left", va="top", fontsize=7.6, fontweight="bold", color=VERMILION_DEEP, bbox={"facecolor": BG_WHITE, "edgecolor": "none", "pad": 1.0}, zorder=5)
 
     ax_a.set_yticks(y_s)
     ax_a.set_yticklabels([MODEL_FULL[s] for s in senders_sorted], fontsize=8.4, fontweight="bold", color=TEXT_DARK)
@@ -1283,14 +1321,14 @@ def build_fig4_dropout(exp1: dict[str, Any], gate: dict[str, Any], exp1_rows: li
     ax_b.text(0.492, 1.073, "Verbatim rules (upper bound)", transform=ax_b.transAxes, ha="left", va="bottom", fontsize=7.4, color=TEXT_BODY)
 
     ax_b.scatter([0.015], [1.036], transform=ax_b.transAxes, clip_on=False, marker="o", s=34, color=VERMILION)
-    ax_b.text(0.042, 1.014, "Teammate withheld rules (<5, n=44)", transform=ax_b.transAxes, ha="left", va="bottom", fontsize=7.4, fontweight="bold", color=VERMILION_DEEP)
+    ax_b.text(0.042, 1.014, "Teammate under-informed (<5, n=44)", transform=ax_b.transAxes, ha="left", va="bottom", fontsize=7.4, fontweight="bold", color=VERMILION_DEEP)
     ax_b.scatter([0.565], [1.036], transform=ax_b.transAxes, clip_on=False, marker="o", s=34, color=TEAL)
     ax_b.text(0.592, 1.014, "Teammate shared rules (≥5, n=116)", transform=ax_b.transAxes, ha="left", va="bottom", fontsize=7.4, fontweight="bold", color=TEAL_DEEP)
 
     fig.text(
         0.97,
         0.024,
-        "*Gemini 4 Neon hit the 16k output token limit on 12 of 44 withheld handoffs (open circle = 88% on finished replies)",
+        "*Gemini 4 Neon hit the 16k output token limit on 12 of 44 under-informed handoffs (open circle = 88% on finished replies)",
         ha="right",
         va="bottom",
         fontsize=7.5,
@@ -1456,7 +1494,7 @@ def build_fig5_heatmap(exp1: dict[str, Any]) -> None:
     ax.plot([-0.32, -0.32], [0.31, 0.96], transform=ax.transAxes, color=TEAL, linewidth=2.2, clip_on=False)
     ax.text(-0.34, 0.635, "Usually\nshared\nrules", transform=ax.transAxes, ha="right", va="center", fontsize=7.5, fontweight="bold", color=TEAL_DEEP, clip_on=False)
     ax.plot([-0.32, -0.32], [0.03, 0.255], transform=ax.transAxes, color=VERMILION, linewidth=2.2, clip_on=False)
-    ax.text(-0.34, 0.142, "Usually\nwithheld\nrules", transform=ax.transAxes, ha="right", va="center", fontsize=7.5, fontweight="bold", color=VERMILION_DEEP, clip_on=False)
+    ax.text(-0.34, 0.142, "Usually\nunder-\ninformed", transform=ax.transAxes, ha="right", va="center", fontsize=7.5, fontweight="bold", color=VERMILION_DEEP, clip_on=False)
 
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -1612,7 +1650,7 @@ def build_fig6_bloat_tax(meta: dict[str, Any]) -> None:
             ax.text(
                 -41.0,
                 5.36,
-                "Withholding partners (omit rules)",
+                "Under-informing partners (omit rules)",
                 ha="left",
                 va="top",
                 fontsize=7.4,
@@ -2047,9 +2085,40 @@ def build_figA1_logits(meta: dict[str, Any]) -> None:
     save_figure_and_data(fig, stem, payload)
 
 
+def parse_args() -> argparse.Namespace:
+    """Parse optional CLI arguments for paper-themed vector PDF export."""
+    parser = argparse.ArgumentParser(
+        description="Generate publication figures (default: web SVG/PNG + JSON; --pdf-dir: PDF)."
+    )
+    parser.add_argument(
+        "--theme",
+        choices=("web", "paper"),
+        default="web",
+        help="Palette theme: 'web' (#F1EADC warm ground) or 'paper' (#FFFFFF white ground).",
+    )
+    parser.add_argument(
+        "--pdf-dir",
+        type=Path,
+        default=None,
+        help="Export vector PDFs into this directory without modifying docs/ or site/.",
+    )
+    parser.add_argument(
+        "--font-dir",
+        type=Path,
+        default=None,
+        help="Optional directory containing Spectral .ttf/.otf files to register with Matplotlib.",
+    )
+    args = parser.parse_args()
+    if args.theme == "paper" and args.pdf_dir is None:
+        parser.error("--theme paper requires --pdf-dir so warm-ground web assets are untouched.")
+    return args
+
+
 def main() -> None:
     """Load frozen study artifacts and generate all 8 publication figures and companion datasets."""
-    configure_editorial_style()
+    args = parse_args()
+    apply_runtime_options(args.theme, args.pdf_dir)
+    configure_editorial_style(theme=args.theme, font_dir=args.font_dir)
 
     meta = json.loads(META_PATH.read_text(encoding="utf-8"))
     exp1 = json.loads(EXP1_PATH.read_text(encoding="utf-8"))
@@ -2076,6 +2145,14 @@ def main() -> None:
         "fig7_triage_paralysis",
         "figA1_choice_logits",
     ]
+    if PDF_OUTPUT_DIR is not None:
+        for s in stems:
+            pdf = PDF_OUTPUT_DIR / f"{s}.pdf"
+            if not pdf.exists() or pdf.stat().st_size == 0:
+                raise RuntimeError(f"Missing or empty PDF output: {pdf}")
+            print(f"OK {s}: pdf={pdf.stat().st_size}B")
+        return
+
     for s in stems:
         svg = FIG_DIR / f"{s}.svg"
         png = FIG_DIR / f"{s}.png"
