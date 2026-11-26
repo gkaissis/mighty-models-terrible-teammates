@@ -82,8 +82,9 @@ uv run python scripts/run_exp2_info_flip.py --episodes-dir data/v2_repro/episode
 uv run python -m common_ground.export_hf --run v2_repro
 ```
 
-## Disclosures & License
+## Disclosures, Funding & Licence
 
+- Funding: This project received funding from The Foresight Institute AI Grants programme.
 - Bare chat-completion API endpoints are evaluated without vendor coding harnesses, tools, web search, or external memory.
 - Author disclosure: George Kaissis is a research consultant and former member of technical staff at Google DeepMind. Two Google models (`google/gemini-4-neon` and `google/gemini-4-hydrogen`) appear in this study. Model endpoints, prompts, task seeds, and calibration checks were fixed before running each evaluation batch, and all raw transcripts, verdicts, and analysis scripts are released publicly.
 - Licensed under Apache-2.0 (see [`LICENSE`](LICENSE)).

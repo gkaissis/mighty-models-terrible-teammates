@@ -1,6 +1,6 @@
 # Brief for agents working on a post
 
-You are working in a copy of the HTAIL article kit (**house style v2.0.0**): a small Astro project that turns one Markdown file into one finished article page and publishes it to GitHub Pages. The design is fixed and approved. Your job is the post: its text, figures, references and front matter.
+You are working in a copy of the HTAIL article kit (**house style v2.1.0**): a small Astro project that turns one Markdown file into one finished article page and publishes it to GitHub Pages. The design is fixed and approved. Your job is the post: its text, figures, references and front matter.
 
 For a matching PDF or arXiv preprint in the same HTAIL visual identity (Spectral, TeX Gyre Pagella Math, IBM Plex Mono, and pure-white publication figures), pair this repository with the companion `latex-kit/` template.
 
@@ -17,7 +17,8 @@ For a matching PDF or arXiv preprint in the same HTAIL visual identity (Spectral
 npm install
 npm run dev        # http://localhost:4321, rebuilds as you save
 npm run build      # writes the finished page to dist/
-npm run check      # type and template check
+npm run lint:prose # deterministic HTAIL prose, spelling, maths and SVG hygiene check
+npm run check      # astro check + lint:prose
 ```
 
 Node 22 or newer (Node 24 recommended). `refs.bib` is read when a page is built: after editing it, save `index.md` again (or restart `npm run dev`) to see the change.
@@ -31,11 +32,12 @@ Node 22 or newer (Node 24 recommended). `refs.bib` is read when a page is built:
 | `refs.bib` | BibTeX entries the post cites | Yes |
 | `public/` | Files served as they are (favicon, licence texts, downloads) | Add only |
 | `.github/workflows/deploy.yml` | Builds and publishes to GitHub Pages (Node 24 actions) | Only the branch name |
-| `src/styles/core.css` | The look, HTAIL house style v2.0.0 | No |
+| `src/styles/core.css` | The look, HTAIL house style v2.1.0 | No |
 | `src/styles/fonts.css` | Self-hosted Spectral and IBM Plex Mono declarations | No |
 | `src/layouts/Article.astro` | The page: header, contents, text, footer, lightbox | No |
 | `src/lib/` | MathJax v4 Pagella SVG, margin notes, quotes, folds, codeboxes, xrefs, BibTeX | No |
 | `src/scripts/article.ts` | Progressive enhancements (lightbox, copy/wrap, folds, scrollspy) | No |
+| `scripts/lint_prose.py` | Deterministic HTAIL prose, typography, British-spelling and SVG linter | No |
 
 ## Front matter
 
@@ -57,6 +59,7 @@ Node 22 or newer (Node 24 recommended). `refs.bib` is read when a page is built:
 | `repository` | URL of the source code repository (shown as `Code` in the header and `Source repository` in the footer) |
 | `dataset` | URL string (labelled `Data`) or `{ url, label }` (for example `{ url: "https://huggingface.co/datasets/...", label: "Data (HuggingFace)" }`), shown in both header and footer |
 | `license` | Licence of the text, for example `CC BY 4.0`, or `{ name, url }`. Ask the author; do not choose one |
+| `funding` | Optional funding disclosure or acknowledgement sentence shown in the footer on both screen and print (or use an in-body `## Funding and acknowledgements` section) |
 | `bibtex` | A complete BibTeX entry for citing the post (displayed with a Copy BibTeX button). Left out, one is generated from the fields above |
 | `legal` | URL of the legal notice and privacy page, shown in the footer |
 | `site` | `{ name, url }`: an optional link back to a home page, shown at the top left |
@@ -165,12 +168,16 @@ You do not implement these; they are why the files above are closed.
 
 These are defaults; the author's draft overrides them.
 
-- British spelling, as on g-k.ai ("centred", "memorisation", "organisation", "normalise", "behaviour").
-- **No middle dots (U+00B7) anywhere**—not in datelines, quote metadata, resource bars, tables or figures. Use commas, periods, pipes or parentheses instead.
+- British spelling, as on g-k.ai ("centred", "memorisation", "organisation", "normalise", "behaviour", "programme", "licence" as noun).
+- No serial (Oxford) commas (`A, B and C`).
+- Zero em-dashes (`—`, `&mdash;`, `&#8212;`) and zero unnecessary semicolons (`;`) in author prose, headings, captions or footnotes (exempting verbatim quotes, code blocks and multi-citations `[@a; @b]`).
+- **No middle dots (U+00B7) anywhere** — not in datelines, quote metadata, resource bars, tables or figures. Use commas, periods, pipes or parentheses instead.
+- Use `(emphasis ours)` rather than `(emphasis added)` when italicising text inside verbatim model quotes.
 - Sentence case for the title and headings; no full stop at the end of a heading.
 - Say who did what: "we" for the lab's work, "I" for the author's own view.
-- Define an abbreviation at first use.
+- Define an abbreviation at first use, and use full canonical model names rather than shortened nicknames.
 - Numbers in the text must match the figures, tables and sources. If you change one, change all of them.
+- Mechanical rules are checked automatically by `scripts/lint_prose.py` (`npm run lint:prose` / `npm run check`). For semantic anti-slop review (contrastive negations, defensive hedging, noun chains, register consistency), dispatch the `htail-editorial-reviewer` subagent from the `htail-editorial` plugin.
 
 Do not invent results, quotations, references or DOIs. If a claim needs a source and you do not have one, leave a visible `TODO(source)` in the text and list it in your report.
 

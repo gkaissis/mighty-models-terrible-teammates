@@ -31,6 +31,7 @@ const updated = longDate(frontmatter.updated);
 const hasDateline = Boolean(docType || published || updated);
 const dataset = linkItem(frontmatter.dataset, 'Data');
 const preprint = linkItem(frontmatter.preprint, 'Preprint');
+const funding = frontmatter.funding ? String(frontmatter.funding).trim() : '';
 const home = frontmatter.site;
 const marks = (a: Author) => [...(numbered ? a.marks : []), ...(a.equal ? ['*'] : []), ...(a.corresponding ? ['†'] : [])].join(',');
 const joiner = (i: number, n: number) => (i === n - 1 ? '' : i === n - 2 ? (n > 2 ? ', and ' : ' and ') : ', ');
@@ -122,6 +123,7 @@ const joiner = (i: number, n: number) => (i === n - 1 ? '' : i === n - 2 ? (n > 
 </main>
 
 <footer class="foot">
+{funding && <p class="foot-funding">{funding}</p>}
 <p class="foot-screen">
 {lic && <>Text licensed under {lic.url ? <a href={lic.url} rel="license">{lic.name}</a> : lic.name}. </>}
 {frontmatter.repository && <><a href={frontmatter.repository}>Source repository</a>. </>}

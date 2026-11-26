@@ -1,4 +1,4 @@
-# Article kit (HTAIL house style v2.0.0)
+# Article kit (HTAIL house style v2.1.0)
 
 One Markdown file in, one finished static article page out, published to GitHub Pages. The kit pairs the editorial look of g-k.ai (Spectral, the warm paper palette, margin notes, A4 print layout) with technical-report ergonomics (build-time TeX Gyre Pagella Math, baseline-aligned speaker quotes, clickable figure lightbox, folded appendices, verbatim prompt/code boxes and subsection navigation), with zero external runtime requests.
 
@@ -22,8 +22,9 @@ For matching PDF and arXiv preprints in the same HTAIL visual identity (Spectral
 - `src/lib/article.mjs`: turns footnotes and `[@key]` citations into numbered margin notes (automatically folding long notes > 220 characters), handles `:::figure`, `:::aside`, `:::quote` and `:::fold`, wraps code/prompt boxes with line numbers and wrap/copy controls, formats table captions, folds `### Appendix X:` subsections and links internal cross-references with colour-coded underlines.
 - `astro.config.mjs`: configures the Markdown pipeline and the WCAG AA+ `htail-paper` Shiki syntax theme.
 - `.github/workflows/deploy.yml`: native Node 24 GitHub Actions workflow for GitHub Pages.
+- `scripts/lint_prose.py`: deterministic HTAIL prose, spelling, typography and SVG hygiene checker wired into `npm run lint:prose` and `npm run check`.
 - Self-hosted font licences in `public/licenses/` (`OFL-Spectral.txt`, `OFL-IBM-Plex-Mono.txt`, `GFL-TeX-Gyre-Pagella.txt`). The built page makes zero requests to external hosts.
 
 ## Updating an existing post
 
-To bring an existing post up to date with house style v2.0.0, copy `astro.config.mjs`, `package.json`, `AGENTS.md`, `README.md`, `CLAUDE.md`, `src/styles/`, `src/layouts/`, `src/lib/`, `src/scripts/`, `src/assets/fonts/` and `public/licenses/` over the post's copies, then run `npm install`. The post's own files (`src/pages/`, `src/figures/`, `refs.bib`) remain untouched.
+To bring an existing post up to date with house style v2.1.0, copy `astro.config.mjs`, `package.json`, `AGENTS.md`, `README.md`, `CLAUDE.md`, `scripts/`, `src/styles/`, `src/layouts/`, `src/lib/`, `src/scripts/`, `src/assets/fonts/` and `public/licenses/` over the post's copies, then run `npm install`. The post's own files (`src/pages/`, `src/figures/`, `refs.bib`) remain untouched.
